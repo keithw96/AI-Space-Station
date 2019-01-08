@@ -13,9 +13,9 @@
 #define GAME_H
 
 #include "SFML/Graphics.hpp"
-
+#include "Tile.h"
 #include <iostream>
-
+#include <vector>
 //
 class Game
 {
@@ -33,6 +33,13 @@ private:
 
 	bool is_running;
 
+	std::vector<Tile> m_tileMap;
+
+	int map[3][3] = {
+	{ 1,2,3 } ,
+	{ 1,2,3 } ,
+	{ 1,2,3 }
+	};
 };
 
 #endif // !GAME_H

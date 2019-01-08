@@ -18,7 +18,13 @@ Game::Game() :
 	m_window{ sf::VideoMode{2500, 2000, 32}, "AI Space Station"},
 	is_running{ true }
 {
-
+	for (int i = 0; i < 3; i++)
+	{
+		for (int j = 0; j < 3; j++)
+		{
+			m_tileMap.push_back(Tile(sf::Vector2f(i, j), map[i][j]));
+		}
+	}
 }
 
 /// <summary>
@@ -88,6 +94,11 @@ void Game::render()
 {
 	//
 	m_window.clear(sf::Color(0, 0, 0));
+
+	for (int i = 0; i < m_tileMap.size(); i++)
+	{
+		m_tileMap[i].draw(&m_window);
+	}
 
 
 	//
