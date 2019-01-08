@@ -12,9 +12,10 @@
 #ifndef GAME_H
 #define GAME_H
 
+#include <iostream>
 #include "SFML/Graphics.hpp"
 
-#include <iostream>
+#include "Player.h"
 
 //
 class Game
@@ -33,6 +34,7 @@ private:
 
 	bool is_running;
 
+	Player * m_player;
 };
 
 #endif // !GAME_H

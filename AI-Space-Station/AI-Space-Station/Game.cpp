@@ -18,7 +18,7 @@ Game::Game() :
 	m_window{ sf::VideoMode{2500, 2000, 32}, "AI Space Station"},
 	is_running{ true }
 {
-
+	m_player = new Player();
 }
 
 /// <summary>
@@ -55,6 +55,8 @@ void Game::run()
 
 void Game::update(sf::Time deltaTime)
 {
+	//
+	m_player->update(deltaTime);
 
 	//
 	if (!is_running)
@@ -89,6 +91,8 @@ void Game::render()
 	//
 	m_window.clear(sf::Color(0, 0, 0));
 
+	//
+	m_player->render(m_window);
 
 	//
 	m_window.display();
