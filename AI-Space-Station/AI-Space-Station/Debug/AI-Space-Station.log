@@ -1,2 +1,3 @@
-﻿  Player.cpp
+﻿  Game.cpp
+c:\users\gameuser\desktop\ai space station\ai-space-station\ai-space-station\game.cpp(21): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
   AI-Space-Station.vcxproj -> C:\Users\gameuser\Desktop\AI Space Station\AI-Space-Station\Debug\AI-Space-Station.exe

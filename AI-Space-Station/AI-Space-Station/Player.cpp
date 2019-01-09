@@ -71,7 +71,7 @@ void Player::loadTextures()
 void Player::update(sf::Time deltaTime, sf::View & v)
 {
 	m_position = m_sprite.getPosition();
-	v.setCenter(m_sprite.getPosition());
+	
 
 	addVelocity();
 	screenWarp();
@@ -79,6 +79,8 @@ void Player::update(sf::Time deltaTime, sf::View & v)
 
 	/*std::cout << m_position.x << std::endl;
 	std::cout << m_position.y << std::endl;*/
+
+	v.setCenter(m_sprite.getPosition());
 }
 
 /// <summary>
@@ -90,8 +92,8 @@ void Player::addVelocity()
 	if (sf::Keyboard::isKeyPressed(m_keyboard.Up))
 	{
 
-		/*m_position.x += (sin(m_sprite.getRotation() * (3.14159265 / 180)) * m_maxSpeed);
-		m_position.y += (-cos(m_sprite.getRotation() * (3.14159265 / 180)) * m_maxSpeed);*/
+		m_position.x += (sin(m_sprite.getRotation() * (3.14159265 / 180)) * m_maxSpeed);
+		m_position.y += (-cos(m_sprite.getRotation() * (3.14159265 / 180)) * m_maxSpeed);
 
 		m_moving = true;
 

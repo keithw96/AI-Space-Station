@@ -67,6 +67,8 @@ void Game::update(sf::Time deltaTime)
 	{
 		m_window.close();
 	}
+
+	m_window.setView(m_view);
 }
 
 //
@@ -97,9 +99,6 @@ void Game::render()
 
 	//
 	m_player->render(m_window);
-
-	//
-	m_window.setView(m_view);
 
 	//
 	m_window.display();
