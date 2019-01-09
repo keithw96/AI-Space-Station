@@ -40,7 +40,7 @@ void Player::init()
 	m_velocity.x = 0;
 	m_velocity.y = 0;
 
-	m_maxSpeed = 25;
+	m_maxSpeed = 15;
 	m_angle = 0;
 	m_maxVelocity = 5;
 
@@ -48,6 +48,8 @@ void Player::init()
 	m_sprite.setPosition(m_position);
 	m_sprite.setOrigin(50, 50);
 	m_sprite.setRotation(0);
+
+	m_moving = false;
 }
 
 /// <summary>
@@ -66,9 +68,10 @@ void Player::loadTextures()
 /// 
 /// </summary>
 /// <param name="deltaTime"></param>
-void Player::update(sf::Time deltaTime)
+void Player::update(sf::Time deltaTime, sf::View & v)
 {
 	m_position = m_sprite.getPosition();
+	v.setCenter(m_sprite.getPosition());
 
 	addVelocity();
 	screenWarp();
@@ -87,81 +90,55 @@ void Player::addVelocity()
 	if (sf::Keyboard::isKeyPressed(m_keyboard.Up))
 	{
 
-		if (m_velocity.y < m_maxVelocity)
-		{
-			m_velocity.y++;
-		}
+		/*m_position.x += (sin(m_sprite.getRotation() * (3.14159265 / 180)) * m_maxSpeed);
+		m_position.y += (-cos(m_sprite.getRotation() * (3.14159265 / 180)) * m_maxSpeed);*/
 
-		m_position.x += (sin(m_sprite.getRotation() * (3.14159265 / 180)) * m_maxSpeed);
-		m_position.y += (-cos(m_sprite.getRotation() * (3.14159265 / 180)) * m_maxSpeed);
+		m_moving = true;
 
 		std::cout << "Up" << std::endl;
 
 	}
 	//
-	/*else if (sf::Keyboard::isKeyPressed(m_keyboard.Down))
-	{
-	if (m_velocity.y < m_maxSpeed)
-	{
-	m_velocity.y++;
-	}
-
-	m_position.y -= m_velocity.y;
-	}*/
-	//
 	else
 	{
-		if (m_velocity.y > 0)
-		{
-			m_velocity.y--;
-		}
+
 	}
 
 	//
 	if (sf::Keyboard::isKeyPressed(m_keyboard.Left))
 	{
-		/*if (m_velocity.x < m_maxSpeed)
-		{
-		m_velocity.x++;
-		}
-
-		m_position.x -= m_velocity.x;*/
-
 		m_angle -= 3;
 
-		std::cout << "Left" << std::endl;
+		//std::cout << "Left" << std::endl;
 	}
 
 	//
 	else if (sf::Keyboard::isKeyPressed(m_keyboard.Right))
 	{
-		/*if (m_velocity.x < m_maxSpeed)
-		{
-		m_velocity.x++;
-		}
-
-		m_position.x += m_velocity.x;*/
-
 		m_angle += 3;
-		std::cout << "Right" << std::endl;
-	}
-	//
-	else
-	{
-		/*if (m_velocity.x > 0)
-		{
-		m_velocity.x--;
-		}*/
+
+		//std::cout << "Right" << std::endl;
 	}
 
+	//
 	if (m_angle > 360)
 	{
 		m_angle = 0;
 	}
+	//
 	else if (m_angle < -360)
 	{
 		m_angle = 0;
 	}
+
+
+	if (m_moving == true)
+	{
+
+	}
+	
+
+
 
 	/*
 	std::cout << m_angle << std::endl;

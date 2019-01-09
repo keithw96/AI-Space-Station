@@ -1,7 +1,2 @@
-﻿  Game.cpp
-  main.cpp
-  Player.cpp
-c:\users\gameuser\desktop\ai space station\ai-space-station\ai-space-station\player.cpp(95): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
-c:\users\gameuser\desktop\ai space station\ai-space-station\ai-space-station\player.cpp(96): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
-  Generating Code...
+﻿  Player.cpp
   AI-Space-Station.vcxproj -> C:\Users\gameuser\Desktop\AI Space Station\AI-Space-Station\Debug\AI-Space-Station.exe

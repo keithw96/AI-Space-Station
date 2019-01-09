@@ -32,6 +32,8 @@ private:
 
 	sf::RenderWindow m_window;
 
+	sf::View m_view;
+
 	bool is_running;
 
 	Player * m_player;

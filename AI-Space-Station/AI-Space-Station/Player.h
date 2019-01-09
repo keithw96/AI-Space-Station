@@ -20,7 +20,7 @@ public:
 	Player();
 	~Player();
 
-	void update(sf::Time deltaTime);
+	void update(sf::Time deltaTime, sf::View & v);
 	void render(sf::RenderWindow& window);
 
 	sf::Vector2f getPosition();
@@ -41,5 +41,7 @@ private:
 	sf::Vector2f m_position;
 	sf::Vector2f m_velocity;
 
-	float m_maxSpeed, m_angle, m_maxVelocity;
+	float m_maxSpeed, m_speed, m_angle, m_maxVelocity, m_impuldseX, m_impulseY;
+
+	bool m_moving;
 };

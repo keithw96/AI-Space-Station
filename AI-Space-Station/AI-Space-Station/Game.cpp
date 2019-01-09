@@ -18,6 +18,10 @@ Game::Game() :
 	m_window{ sf::VideoMode{2500, 2000, 32}, "AI Space Station"},
 	is_running{ true }
 {
+	m_view.setCenter(m_window.getSize().x / 2, m_window.getSize().y / 2);
+	m_view.setSize(2500, 2000);
+
+
 	m_player = new Player();
 }
 
@@ -56,7 +60,7 @@ void Game::run()
 void Game::update(sf::Time deltaTime)
 {
 	//
-	m_player->update(deltaTime);
+	m_player->update(deltaTime, m_view);
 
 	//
 	if (!is_running)
@@ -93,6 +97,9 @@ void Game::render()
 
 	//
 	m_player->render(m_window);
+
+	//
+	m_window.setView(m_view);
 
 	//
 	m_window.display();
