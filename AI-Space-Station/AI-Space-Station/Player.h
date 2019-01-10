@@ -28,6 +28,12 @@ public:
 private:
 	void addVelocity();
 	void screenWarp();
+	void powerupColourAnimate();
+
+	void workerCollision();
+	void projectileCollision();
+	void enemyCollision();
+	void powerupCollision();
 
 	void init();
 	void loadTextures();
@@ -41,7 +47,9 @@ private:
 	sf::Vector2f m_position;
 	sf::Vector2f m_velocity;
 
-	float m_maxSpeed, m_speed, m_angle, m_maxVelocity, m_impuldseX, m_impulseY;
+	float m_maxSpeed, m_boostSpeed, m_angle, m_maxVelocity, m_impulseX, m_impulseY, m_friction;
 
-	bool m_moving;
+	int m_health, m_animatedColour, m_iColour, m_bColour;
+
+	bool m_moving, m_invincible, m_boosted;
 };

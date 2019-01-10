@@ -41,8 +41,16 @@ void Player::init()
 	m_velocity.y = 0;
 
 	m_maxSpeed = 15;
+	m_boostSpeed = 10;
 	m_angle = 0;
 	m_maxVelocity = 5;
+	m_friction = 0.01;
+
+	m_health = 100;
+	m_animatedColour = 0;
+
+	m_iColour = 1;
+	m_bColour = 1;
 
 	m_sprite.setTexture(m_texture);
 	m_sprite.setPosition(m_position);
@@ -50,6 +58,8 @@ void Player::init()
 	m_sprite.setRotation(0);
 
 	m_moving = false;
+	m_invincible = false;
+	m_boosted = false;
 }
 
 /// <summary>
@@ -70,6 +80,17 @@ void Player::loadTextures()
 /// <param name="deltaTime"></param>
 void Player::update(sf::Time deltaTime, sf::View & v)
 {
+	//
+	powerupColourAnimate();
+	
+	//
+	if (m_invincible == false && m_boosted == false)
+	{
+		m_animatedColour = 0;
+		m_iColour = 1;
+		m_bColour = 1;
+	}
+
 	m_position = m_sprite.getPosition();
 	
 
@@ -80,7 +101,7 @@ void Player::update(sf::Time deltaTime, sf::View & v)
 	/*std::cout << m_position.x << std::endl;
 	std::cout << m_position.y << std::endl;*/
 
-	v.setCenter(m_sprite.getPosition());
+	//v.setCenter(m_sprite.getPosition());
 }
 
 /// <summary>
@@ -88,12 +109,26 @@ void Player::update(sf::Time deltaTime, sf::View & v)
 /// </summary>
 void Player::addVelocity()
 {
+	float speed = 0.0f;
+
 	//
 	if (sf::Keyboard::isKeyPressed(m_keyboard.Up))
 	{
 
-		m_position.x += (sin(m_sprite.getRotation() * (3.14159265 / 180)) * m_maxSpeed);
-		m_position.y += (-cos(m_sprite.getRotation() * (3.14159265 / 180)) * m_maxSpeed);
+		if (m_boosted == true)
+		{
+			speed = m_maxSpeed + m_boostSpeed;
+		}
+		//
+		else if (m_boosted == false)
+		{
+			speed = m_maxSpeed;
+		}
+
+		
+		m_position.x += (sin(m_sprite.getRotation() * (3.14159265 / 180)) * speed);
+		m_position.y += (-cos(m_sprite.getRotation() * (3.14159265 / 180)) * speed);
+		
 
 		m_moving = true;
 
@@ -151,6 +186,46 @@ void Player::addVelocity()
 	m_sprite.setPosition(m_position);
 }
 
+//
+void Player::workerCollision()
+{
+
+}
+
+//
+void Player::projectileCollision()
+{
+	if (m_invincible == true)
+	{
+
+	}
+
+	else if (m_invincible == false)
+	{
+
+	}
+}
+
+//
+void Player::enemyCollision()
+{
+	if (m_invincible == true)
+	{
+
+	}
+
+	else if (m_invincible == false)
+	{
+
+	}
+}
+
+//
+void Player::powerupCollision()
+{
+
+}
+
 /// <summary>
 /// 
 /// </summary>
@@ -172,6 +247,50 @@ void Player::screenWarp()
 	else if (m_position.y >= 2100)
 	{
 		m_sprite.setPosition(m_position.x, -100);
+	}
+}
+
+//
+void Player::powerupColourAnimate()
+{
+	//
+	if (m_invincible == true)
+	{
+		m_animatedColour++;
+
+		if (m_animatedColour > 50)
+		{
+			m_iColour *= -1;
+			m_animatedColour = 0;
+		}
+	}
+
+	//
+	else if (m_boosted == true)
+	{
+		m_animatedColour++;
+
+		if (m_animatedColour > 50)
+		{
+			m_bColour *= -1;
+			m_animatedColour = 0;
+		}
+	}
+
+	//
+	if (m_iColour == -1)
+	{
+		m_sprite.setColor(sf::Color::Blue);
+	}
+	//
+	else if (m_bColour == -1)
+	{
+		m_sprite.setColor(sf::Color::Red);
+	}
+	//
+	else
+	{
+		m_sprite.setColor(sf::Color::White);
 	}
 }
 

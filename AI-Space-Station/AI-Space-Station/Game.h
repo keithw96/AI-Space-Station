@@ -15,7 +15,12 @@
 #include <iostream>
 #include "SFML/Graphics.hpp"
 
-#include "Player.h"
+class Player;
+
+enum class GameState
+{
+	SPLASH, LICENSE, MENU, GAME, CONTROLS, GAMEOVER
+};
 
 //
 class Game
@@ -24,6 +29,9 @@ public:
 	Game();
 	~Game();
 	void run();
+
+protected:
+	GameState gameState;
 
 private:
 	void processEvents();
@@ -38,5 +46,7 @@ private:
 
 	Player * m_player;
 };
+
+#include "Player.h"
 
 #endif // !GAME_H
