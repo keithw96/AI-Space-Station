@@ -15,6 +15,8 @@
 #include <iostream>
 #include "SFML/Graphics.hpp"
 
+class Splash;
+class License;
 class Player;
 
 enum class GameState
@@ -28,6 +30,8 @@ class Game
 public:
 	Game();
 	~Game();
+	void setGameState(GameState gameMode);
+	GameState getGameState();
 	void run();
 
 protected:
@@ -44,9 +48,13 @@ private:
 
 	bool is_running;
 
+	Splash * m_splash;
+	License * m_license;
 	Player * m_player;
 };
 
+#include "SplashScreen.h"
+#include "LicenseScreen.h"
 #include "Player.h"
 
 #endif // !GAME_H

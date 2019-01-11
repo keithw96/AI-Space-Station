@@ -17,12 +17,13 @@
 Game::Game() :
 	m_window{ sf::VideoMode{2500, 2000, 32}, "AI Space Station"},
 	is_running{ true },
-	gameState{GameState::GAME}
+	gameState{GameState::LICENSE}
 {
 	m_view.setCenter(m_window.getSize().x / 2, m_window.getSize().y / 2);
 	m_view.setSize(2500, 2000);
 
-
+	m_splash = new Splash();
+	m_license = new License();
 	m_player = new Player();
 }
 
@@ -70,10 +71,21 @@ void Game::update(sf::Time deltaTime)
 	switch (gameState)
 	{
 	case GameState::SPLASH:
-
+		m_splash->update(deltaTime);
+		//
+		if (m_splash->getScreenTime() > 270)
+		{
+			setGameState(GameState::LICENSE);
+		}
 		break;
 	case GameState::LICENSE:
-
+		//
+		m_license->update(deltaTime);
+		//
+		if (m_license->getScreenTime() > 270)
+		{
+			setGameState(GameState::GAME);
+		}
 		break;
 	case GameState::MENU:
 
@@ -126,10 +138,10 @@ void Game::render()
 	switch (gameState)
 	{
 	case GameState::SPLASH:
-
+		m_splash->render(m_window);
 		break;
 	case GameState::LICENSE:
-
+		m_license->render(m_window);
 		break;
 	case GameState::MENU:
 
@@ -148,4 +160,22 @@ void Game::render()
 
 	//
 	m_window.display();
+}
+
+/// <summary>
+/// 
+/// </summary>
+/// <param name="gameMode"></param>
+void Game::setGameState(GameState gameMode)
+{
+	gameState = gameMode;
+}
+
+/// <summary>
+/// 
+/// </summary>
+/// <returns></returns>
+GameState Game::getGameState()
+{
+	return gameState;
 }
