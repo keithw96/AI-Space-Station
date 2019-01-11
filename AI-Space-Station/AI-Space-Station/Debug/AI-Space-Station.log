@@ -1,2 +1,9 @@
-﻿  main.cpp
-  AI-Space-Station.vcxproj -> C:\Users\gameuser\Desktop\AI-Space-Station\Debug\AI-Space-Station.exe
+﻿  Game.cpp
+c:\users\gameuser\desktop\ai space station\ai-space-station\ai-space-station\game.cpp(22): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
+  Player.cpp
+c:\users\gameuser\desktop\ai space station\ai-space-station\ai-space-station\player.cpp(47): warning C4305: '=': truncation from 'double' to 'float'
+c:\users\gameuser\desktop\ai space station\ai-space-station\ai-space-station\player.cpp(129): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+c:\users\gameuser\desktop\ai space station\ai-space-station\ai-space-station\player.cpp(130): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+  main.cpp
+  Generating Code...
+  AI-Space-Station.vcxproj -> C:\Users\gameuser\Desktop\AI Space Station\AI-Space-Station\Debug\AI-Space-Station.exe

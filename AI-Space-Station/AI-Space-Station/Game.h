@@ -12,9 +12,15 @@
 #ifndef GAME_H
 #define GAME_H
 
+#include <iostream>
 #include "SFML/Graphics.hpp"
 
-#include <iostream>
+class Player;
+
+enum class GameState
+{
+	SPLASH, LICENSE, MENU, GAME, CONTROLS, GAMEOVER
+};
 
 //
 class Game
@@ -24,6 +30,9 @@ public:
 	~Game();
 	void run();
 
+protected:
+	GameState gameState;
+
 private:
 	void processEvents();
 	void update(sf::Time deltaTime);
@@ -31,8 +40,13 @@ private:
 
 	sf::RenderWindow m_window;
 
+	sf::View m_view;
+
 	bool is_running;
 
+	Player * m_player;
 };
+
+#include "Player.h"
 
 #endif // !GAME_H
