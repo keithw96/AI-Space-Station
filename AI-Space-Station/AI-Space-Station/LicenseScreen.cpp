@@ -11,19 +11,25 @@
 
 #include "LicenseScreen.h"
 
-//
+/// <summary>
+/// 
+/// </summary>
 License::License()
 {
 	init();
 }
 
-//
+/// <summary>
+/// 
+/// </summary>
 License::~License()
 {
 
 }
 
-//
+/// <summary>
+/// 
+/// </summary>
 void License::init()
 {
 	//
@@ -38,7 +44,9 @@ void License::init()
 	m_screenTime = 0;
 }
 
-//
+/// <summary>
+/// 
+/// </summary>
 void License::loadTextures()
 {
 	//
@@ -48,13 +56,19 @@ void License::loadTextures()
 	}
 }
 
-//
+/// <summary>
+/// 
+/// </summary>
+/// <param name="deltaTime"></param>
 void License::update(sf::Time deltaTime)
 {
 	m_screenTime++;
 }
 
-//
+/// <summary>
+/// 
+/// </summary>
+/// <param name="window"></param>
 void License::render(sf::RenderWindow& window)
 {
 	window.draw(m_sprite);

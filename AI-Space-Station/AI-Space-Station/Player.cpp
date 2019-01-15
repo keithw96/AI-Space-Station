@@ -52,6 +52,8 @@ void Player::init()
 	m_iColour = 1;
 	m_bColour = 1;
 
+	m_powerupTime = 0;
+
 	m_sprite.setTexture(m_texture);
 	m_sprite.setPosition(m_position);
 	m_sprite.setOrigin(50, 50);
@@ -78,10 +80,12 @@ void Player::loadTextures()
 /// 
 /// </summary>
 /// <param name="deltaTime"></param>
-void Player::update(sf::Time deltaTime, sf::View & v)
+void Player::update(sf::Time deltaTime, sf::View & v, PowerUp * powerup)
 {
 	//
 	powerupColourAnimate();
+	//
+	powerupTime();
 	
 	//
 	if (m_invincible == false && m_boosted == false)
@@ -96,6 +100,7 @@ void Player::update(sf::Time deltaTime, sf::View & v)
 
 	addVelocity();
 	screenWarp();
+	powerupCollision(powerup);
 
 
 	/*std::cout << m_position.x << std::endl;
@@ -144,7 +149,7 @@ void Player::addVelocity()
 	//
 	if (sf::Keyboard::isKeyPressed(m_keyboard.Left))
 	{
-		m_angle -= 3;
+		m_angle -= 5;
 
 		//std::cout << "Left" << std::endl;
 	}
@@ -152,7 +157,7 @@ void Player::addVelocity()
 	//
 	else if (sf::Keyboard::isKeyPressed(m_keyboard.Right))
 	{
-		m_angle += 3;
+		m_angle += 5;
 
 		//std::cout << "Right" << std::endl;
 	}
@@ -195,12 +200,7 @@ void Player::workerCollision()
 //
 void Player::projectileCollision()
 {
-	if (m_invincible == true)
-	{
-
-	}
-
-	else if (m_invincible == false)
+	if (m_invincible == false)
 	{
 
 	}
@@ -209,21 +209,45 @@ void Player::projectileCollision()
 //
 void Player::enemyCollision()
 {
-	if (m_invincible == true)
-	{
-
-	}
-
-	else if (m_invincible == false)
+	if (m_invincible == false)
 	{
 
 	}
 }
 
-//
-void Player::powerupCollision()
+/// <summary>
+/// 
+/// </summary>
+/// <param name="powerup"></param>
+void Player::powerupCollision(PowerUp * powerup)
 {
+	//
+	if (powerup->getActive() == true)
+	{
+		if (m_sprite.getGlobalBounds().intersects(powerup->getSprite().getGlobalBounds()))
+		{
+			powerup->setActive(false);
 
+			//
+			if (powerup->getType() >= 1 && powerup->getType() <= 10)
+			{
+				m_invincible = true;
+				m_boosted = false;
+				m_iColour = 1; 
+				m_bColour = 1;
+				m_powerupTime = 250;
+			}
+			//
+			else if (powerup->getType() >= 11 && powerup->getType() <= 20)
+			{
+				m_invincible = false;
+				m_boosted = true;
+				m_iColour = 1;
+				m_bColour = 1;
+				m_powerupTime = 400;
+			}
+		}
+	}
 }
 
 /// <summary>
@@ -250,7 +274,9 @@ void Player::screenWarp()
 	}
 }
 
-//
+/// <summary>
+/// 
+/// </summary>
 void Player::powerupColourAnimate()
 {
 	//
@@ -258,7 +284,7 @@ void Player::powerupColourAnimate()
 	{
 		m_animatedColour++;
 
-		if (m_animatedColour > 50)
+		if (m_animatedColour > 20)
 		{
 			m_iColour *= -1;
 			m_animatedColour = 0;
@@ -270,7 +296,7 @@ void Player::powerupColourAnimate()
 	{
 		m_animatedColour++;
 
-		if (m_animatedColour > 50)
+		if (m_animatedColour > 20)
 		{
 			m_bColour *= -1;
 			m_animatedColour = 0;
@@ -291,6 +317,27 @@ void Player::powerupColourAnimate()
 	else
 	{
 		m_sprite.setColor(sf::Color::White);
+	}
+}
+
+/// <summary>
+/// 
+/// </summary>
+void Player::powerupTime()
+{
+	if (m_invincible == true || m_boosted == true)
+	{
+		m_powerupTime--;
+		std::cout << m_powerupTime << std::endl;
+
+		if (m_powerupTime <= 0)
+		{
+			m_invincible = false;
+			m_boosted = false;
+			m_iColour = 1;
+			m_bColour = 1;
+			m_powerupTime = 0;
+		}
 	}
 }
 

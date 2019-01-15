@@ -1,2 +1,5 @@
-﻿  LicenseScreen.cpp
+﻿  Player.cpp
+c:\users\gameuser\desktop\ai space station\ai-space-station\ai-space-station\player.cpp(47): warning C4305: '=': truncation from 'double' to 'float'
+c:\users\gameuser\desktop\ai space station\ai-space-station\ai-space-station\player.cpp(134): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+c:\users\gameuser\desktop\ai space station\ai-space-station\ai-space-station\player.cpp(135): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
   AI-Space-Station.vcxproj -> C:\Users\gameuser\Desktop\AI Space Station\AI-Space-Station\Debug\AI-Space-Station.exe

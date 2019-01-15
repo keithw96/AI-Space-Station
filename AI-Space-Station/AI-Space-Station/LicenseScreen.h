@@ -9,6 +9,9 @@
 // Time taken:
 // Known bugs:
 
+#ifndef LICENSE_H
+#define LICENSE_H
+
 #include "SFML/Graphics.hpp"
 
 #include <iostream>
@@ -36,3 +39,5 @@ private:
 
 	int m_screenTime;
 };
+
+#endif // !LICENSE_H

@@ -9,6 +9,9 @@
 // Time taken:
 // Known bugs:
 
+#ifndef SPLASH_H
+#define SPLASH_H
+
 #include "SFML/Graphics.hpp"
 
 #include <iostream>
@@ -37,3 +40,5 @@ private:
 
 	float m_yPosOne, m_xPosTwo, m_xPosThree, m_yPosThree;
 };
+
+#endif // !SPLASH_H
