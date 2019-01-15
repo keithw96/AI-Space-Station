@@ -20,13 +20,6 @@ Game::Game() :
 {
 	loadSprites();
 
-	playerView.reset(sf::FloatRect(0, 0, 200.0, 250.0));
-	playerView.setViewport(sf::FloatRect(0, 0, 1.0, 1.0));
-
-	miniMap.reset(sf::FloatRect(0,0, m_window.getSize().x /2, m_window.getSize().y /2));
-	miniMap.setViewport(sf::FloatRect(1.1f - (1.f*miniMap.getSize().x) / m_window.getSize().x - 0.02f, 0.7f - (1.f*miniMap.getSize().y) / m_window.getSize().y - 0.02f, (1.f*miniMap.getSize().x) / m_window.getSize().x, (1.f*miniMap.getSize().y) / m_window.getSize().y));
-	miniMap.zoom(4.0f);
-
 	for (int i = 0; i < 32; i++)
 	{
 		for (int j = 0; j < 32; j++)

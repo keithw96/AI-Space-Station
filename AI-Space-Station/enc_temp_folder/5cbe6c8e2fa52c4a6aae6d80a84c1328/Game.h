@@ -32,10 +32,6 @@ private:
 	void determineTile(int type, int x, int y);
 
 	sf::RenderWindow m_window;
-	
-	sf::View playerView;
-	sf::View miniMap;
-
 	sf::Texture m_horizontalTileTexture;
 	sf::Texture m_verticalTileTexture;
 	sf::Texture m_bottomLeftTileTexture;
