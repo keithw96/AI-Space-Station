@@ -70,7 +70,7 @@ void Player::loadTextures()
 	//
 	if (!m_texture.loadFromFile("ASSETS/Textures/PlayerShip.png"))
 	{
-		std::cout << "Error! Unable to load .png from game files!" << std::endl;
+		std::cout << "Error! Unable to load PlayerShip.png from game files!" << std::endl;
 	}
 }
 
@@ -311,3 +311,5 @@ sf::Vector2f Player::getPosition()
 {
 	return m_sprite.getPosition();
 }
+
+
