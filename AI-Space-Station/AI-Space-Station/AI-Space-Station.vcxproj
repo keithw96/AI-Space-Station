@@ -129,12 +129,14 @@
     <ClCompile Include="LicenseScreen.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Power-Up.cpp" />
     <ClCompile Include="SplashScreen.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
     <ClInclude Include="LicenseScreen.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="Power-Up.h" />
     <ClInclude Include="SplashScreen.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

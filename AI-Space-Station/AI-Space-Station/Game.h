@@ -15,9 +15,11 @@
 #include <iostream>
 #include "SFML/Graphics.hpp"
 
+//
 class Splash;
 class License;
 class Player;
+class PowerUp;
 
 enum class GameState
 {
@@ -48,13 +50,16 @@ private:
 
 	bool is_running;
 
+	//
 	Splash * m_splash;
 	License * m_license;
 	Player * m_player;
+	PowerUp * m_powerup;
 };
 
 #include "SplashScreen.h"
 #include "LicenseScreen.h"
 #include "Player.h"
+#include "Power-Up.h"
 
 #endif // !GAME_H
