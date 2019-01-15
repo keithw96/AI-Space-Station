@@ -18,14 +18,14 @@ Game::Game() :
 	m_window{ sf::VideoMode{2500, 2000, 32}, "AI Space Station"},
 	is_running{ true }
 {
-	loadSprites();
-
-	playerView.reset(sf::FloatRect(0, 0, 200.0, 250.0));
+	playerView.reset(sf::FloatRect(0, 0, 2500, 2000));
 	playerView.setViewport(sf::FloatRect(0, 0, 1.0, 1.0));
 
-	miniMap.reset(sf::FloatRect(0,0, m_window.getSize().x /2, m_window.getSize().y /2));
-	miniMap.setViewport(sf::FloatRect(1.1f - (1.f*miniMap.getSize().x) / m_window.getSize().x - 0.02f, 0.7f - (1.f*miniMap.getSize().y) / m_window.getSize().y - 0.02f, (1.f*miniMap.getSize().x) / m_window.getSize().x, (1.f*miniMap.getSize().y) / m_window.getSize().y));
-	miniMap.zoom(4.0f);
+	miniMap.reset(sf::FloatRect(0, 0, m_window.getSize().x / 2, m_window.getSize().y / 2));
+	miniMap.setViewport(sf::FloatRect(1.1f - (1.f*miniMap.getSize().x) / m_window.getSize().x - 0.04f, 0.3f - (1.f*miniMap.getSize().y) / m_window.getSize().y - 0.02f, (1.f*miniMap.getSize().x) / m_window.getSize().x, (1.f*miniMap.getSize().y) / m_window.getSize().y));
+	miniMap.zoom(11.0f);
+
+	loadSprites();
 
 	for (int i = 0; i < 32; i++)
 	{
@@ -104,12 +104,20 @@ void Game::render()
 	//
 	m_window.clear(sf::Color(0, 0, 0));
 
+	m_window.setView(playerView);
+
 	for (int i = 0; i < m_tileMap.size(); i++)
 	{
 		m_tileMap[i].draw(&m_window);
 	}
 
-
+	
+	m_window.setView(miniMap);
+	
+	for (int i = 0; i < m_tileMap.size(); i++)
+	{
+		m_tileMap[i].draw(&m_window);
+	}
 	//
 	m_window.display();
 }
