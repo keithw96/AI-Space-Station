@@ -56,7 +56,7 @@ void Player::init()
 
 	m_sprite.setTexture(m_texture);
 	m_sprite.setPosition(m_position);
-	m_sprite.setOrigin(50, 50);
+	m_sprite.setOrigin(m_sprite.getTextureRect().width / 2, m_sprite.getTextureRect().height / 2);
 	m_sprite.setRotation(0);
 
 	m_moving = false;
@@ -83,6 +83,7 @@ void Player::loadTextures()
 void Player::update(sf::Time deltaTime, sf::View & v, PowerUp * powerup)
 {
 	//
+
 	powerupColourAnimate();
 	//
 	powerupTime();
@@ -99,14 +100,14 @@ void Player::update(sf::Time deltaTime, sf::View & v, PowerUp * powerup)
 	
 
 	addVelocity();
-	screenWarp();
+	//screenWarp();
 	powerupCollision(powerup);
 
 
 	/*std::cout << m_position.x << std::endl;
 	std::cout << m_position.y << std::endl;*/
 
-	//v.setCenter(m_sprite.getPosition());
+	v.setCenter(m_sprite.getPosition());
 }
 
 /// <summary>

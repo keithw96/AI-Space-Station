@@ -1,5 +1,6 @@
 ﻿  Player.cpp
-c:\users\gameuser\desktop\ai space station\ai-space-station\ai-space-station\player.cpp(47): warning C4305: '=': truncation from 'double' to 'float'
-c:\users\gameuser\desktop\ai space station\ai-space-station\ai-space-station\player.cpp(134): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
-c:\users\gameuser\desktop\ai space station\ai-space-station\ai-space-station\player.cpp(135): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
-  AI-Space-Station.vcxproj -> C:\Users\gameuser\Desktop\AI Space Station\AI-Space-Station\Debug\AI-Space-Station.exe
+c:\users\gameuser\documents\college stuff\ai for games\project\ai-space-station\ai-space-station\ai-space-station\player.cpp(47): warning C4305: '=': truncation from 'double' to 'float'
+c:\users\gameuser\documents\college stuff\ai for games\project\ai-space-station\ai-space-station\ai-space-station\player.cpp(59): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\gameuser\documents\college stuff\ai for games\project\ai-space-station\ai-space-station\ai-space-station\player.cpp(135): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+c:\users\gameuser\documents\college stuff\ai for games\project\ai-space-station\ai-space-station\ai-space-station\player.cpp(136): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+  AI-Space-Station.vcxproj -> C:\Users\gameuser\Documents\college stuff\AI for games\Project\AI-Space-Station\AI-Space-Station\Debug\AI-Space-Station.exe
