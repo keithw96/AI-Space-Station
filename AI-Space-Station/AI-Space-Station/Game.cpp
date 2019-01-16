@@ -177,7 +177,7 @@ void Game::render()
 			m_tileMap[i].draw(&m_window);
 		}
 
-		m_player->render(m_window);
+		m_player->render(m_window, sf::Vector2f(1.0f, 1.0f));
 		//
 		m_powerup->render(m_window);
 
@@ -188,7 +188,7 @@ void Game::render()
 			m_tileMap[i].draw(&m_window);
 		}
 
-		m_player->render(m_window);
+		m_player->render(m_window, sf::Vector2f(10.0f, 10.0f));
 		//
 		m_powerup->render(m_window);
 		break;

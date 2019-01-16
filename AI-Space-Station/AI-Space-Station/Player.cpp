@@ -34,8 +34,8 @@ void Player::init()
 {
 	loadTextures();
 
-	m_position.x = 200;
-	m_position.y = 200;
+	m_position.x = 2750;
+	m_position.y = 5175;
 
 	m_velocity.x = 0;
 	m_velocity.y = 0;
@@ -69,7 +69,6 @@ void Player::init()
 /// </summary>
 void Player::loadTextures()
 {
-	//
 	if (!m_texture.loadFromFile("ASSETS/Textures/PlayerShip.png"))
 	{
 		std::cout << "Error! Unable to load PlayerShip.png from game files!" << std::endl;
@@ -82,13 +81,9 @@ void Player::loadTextures()
 /// <param name="deltaTime"></param>
 void Player::update(sf::Time deltaTime, sf::View & v, PowerUp * powerup)
 {
-	//
-
 	powerupColourAnimate();
-	//
 	powerupTime();
 	
-	//
 	if (m_invincible == false && m_boosted == false)
 	{
 		m_animatedColour = 0;
@@ -98,16 +93,20 @@ void Player::update(sf::Time deltaTime, sf::View & v, PowerUp * powerup)
 
 	m_position = m_sprite.getPosition();
 	
-
 	addVelocity();
-	//screenWarp();
 	powerupCollision(powerup);
 
-
-	/*std::cout << m_position.x << std::endl;
-	std::cout << m_position.y << std::endl;*/
-
 	v.setCenter(m_sprite.getPosition());
+}
+
+/// <summary>
+/// 
+/// </summary>
+/// <param name="window"></param>
+void Player::render(sf::RenderWindow& window, sf::Vector2f scale)
+{
+	m_sprite.setScale(scale);
+	window.draw(m_sprite);
 }
 
 /// <summary>
@@ -116,11 +115,9 @@ void Player::update(sf::Time deltaTime, sf::View & v, PowerUp * powerup)
 void Player::addVelocity()
 {
 	float speed = 0.0f;
-
 	//
 	if (sf::Keyboard::isKeyPressed(m_keyboard.Up))
 	{
-
 		if (m_boosted == true)
 		{
 			speed = m_maxSpeed + m_boostSpeed;
@@ -130,37 +127,23 @@ void Player::addVelocity()
 		{
 			speed = m_maxSpeed;
 		}
-
-		
+	
 		m_position.x += (sin(m_sprite.getRotation() * (3.14159265 / 180)) * speed);
 		m_position.y += (-cos(m_sprite.getRotation() * (3.14159265 / 180)) * speed);
 		
-
 		m_moving = true;
-
-		std::cout << "Up" << std::endl;
-
-	}
-	//
-	else
-	{
-
 	}
 
 	//
 	if (sf::Keyboard::isKeyPressed(m_keyboard.Left))
 	{
 		m_angle -= 5;
-
-		//std::cout << "Left" << std::endl;
 	}
 
 	//
 	else if (sf::Keyboard::isKeyPressed(m_keyboard.Right))
 	{
 		m_angle += 5;
-
-		//std::cout << "Right" << std::endl;
 	}
 
 	//
@@ -179,14 +162,6 @@ void Player::addVelocity()
 	{
 
 	}
-	
-
-
-
-	/*
-	std::cout << m_angle << std::endl;
-	std::cout << m_sprite.getRotation() << std::endl;
-	*/
 
 	m_sprite.setRotation(m_angle);
 	m_sprite.setPosition(m_position);
@@ -248,30 +223,6 @@ void Player::powerupCollision(PowerUp * powerup)
 				m_powerupTime = 400;
 			}
 		}
-	}
-}
-
-/// <summary>
-/// 
-/// </summary>
-void Player::screenWarp()
-{
-	if (m_position.x <= -150)
-	{
-		m_sprite.setPosition(2500, m_position.y);
-	}
-	else if (m_position.x >= 2600)
-	{
-		m_sprite.setPosition(-50, m_position.y);
-	}
-
-	if (m_position.y <= -150)
-	{
-		m_sprite.setPosition(m_position.x, 2050);
-	}
-	else if (m_position.y >= 2100)
-	{
-		m_sprite.setPosition(m_position.x, -100);
 	}
 }
 
@@ -340,15 +291,6 @@ void Player::powerupTime()
 			m_powerupTime = 0;
 		}
 	}
-}
-
-/// <summary>
-/// 
-/// </summary>
-/// <param name="window"></param>
-void Player::render(sf::RenderWindow& window)
-{
-	window.draw(m_sprite);
 }
 
 /// <summary>

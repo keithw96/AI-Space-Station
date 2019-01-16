@@ -25,13 +25,12 @@ public:
 	~Player();
 
 	void update(sf::Time deltaTime, sf::View & v, PowerUp * powerup);
-	void render(sf::RenderWindow& window);
+	void render(sf::RenderWindow& window, sf::Vector2f scale);
 
 	sf::Vector2f getPosition();
 
 private:
 	void addVelocity();
-	void screenWarp();
 	void powerupColourAnimate();
 	void powerupTime();
 
