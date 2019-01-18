@@ -41,6 +41,7 @@ Game::Game() :
 
 	m_nestArr.push_back(AlienNest(sf::Vector2f(4260, 812), m_nestSprite, m_projectileSprite, m_predatorSprite));
 	m_nestArr.push_back(AlienNest(sf::Vector2f(1061, 1557), m_nestSprite, m_projectileSprite, m_predatorSprite));
+	m_nestArr.push_back(AlienNest(sf::Vector2f(4295, 3555), m_nestSprite, m_projectileSprite, m_predatorSprite));
 
 	m_splash = new Splash();
 	m_license = new License();
