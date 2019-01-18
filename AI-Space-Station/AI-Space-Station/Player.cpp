@@ -54,6 +54,7 @@ void Player::init()
 
 	m_powerupTime = 0;
 
+	m_projectileSprite.setTexture(m_projectileTxt);
 	m_sprite.setTexture(m_texture);
 	m_sprite.setPosition(m_position);
 	m_sprite.setOrigin(m_sprite.getTextureRect().width / 2, m_sprite.getTextureRect().height / 2);
@@ -73,6 +74,8 @@ void Player::loadTextures()
 	{
 		std::cout << "Error! Unable to load PlayerShip.png from game files!" << std::endl;
 	}
+
+	m_projectileTxt.loadFromFile("ASSETS/Textures/playerLaserBall.png");
 }
 
 /// <summary>

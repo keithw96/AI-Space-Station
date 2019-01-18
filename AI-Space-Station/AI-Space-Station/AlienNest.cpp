@@ -29,9 +29,6 @@ void AlienNest::update(sf::Time deltaTime, sf::Vector2f playerPos)
 			i--;
 		}
 	}
-
-	std::cout << std::to_string(m_projectiles.size()) << std::endl;
-
 }
 
 void AlienNest::render(sf::RenderWindow *window, sf::Vector2f scale)

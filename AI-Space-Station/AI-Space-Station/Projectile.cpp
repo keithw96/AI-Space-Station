@@ -21,7 +21,6 @@ Projectile::~Projectile()
 
 void Projectile::Update(sf::Time deltaTime, sf::Vector2f playerPos)
 {
-	//std::cout << std::to_string(count) << std::endl;
 	if (m_homing && m_alive)
 	{
 		count++;
@@ -64,12 +63,5 @@ void Projectile::Homing(sf::Vector2f playerPos)
 		m_position.y -= m_velocity;
 	}
 
-	float PI = 3.14159265;
-
-	float dx = m_position.x - playerPos.x;
-	float dy = m_position.y - playerPos.y;
-
-	m_rotation = ((atan2(dy, dx)) * 180 / PI) + 180;
-	m_sprite.setRotation(m_rotation);
 	m_sprite.setPosition(m_position);
 }

@@ -30,6 +30,14 @@ enum class GameState
 	SPLASH, LICENSE, MENU, GAME, CONTROLS, GAMEOVER
 };
 
+struct VectorComparator
+{
+	bool operator() (sf::Vector2f lhs, sf::Vector2f rhs) const
+	{
+		return std::tie(lhs.x, rhs.y) < std::tie(rhs.x, lhs.y);
+	}
+};
+
 //
 class Game
 {

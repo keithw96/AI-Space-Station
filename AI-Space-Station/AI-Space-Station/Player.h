@@ -14,7 +14,7 @@
 
 #include "SFML/Graphics.hpp"
 #include "Power-Up.h"
-
+#include "Projectile.h"
 #include <iostream>
 
 //
@@ -45,11 +45,14 @@ private:
 	sf::Keyboard m_keyboard;
 
 	sf::Texture m_texture;
-
+	sf::Texture m_projectileTxt;
 	sf::Sprite m_sprite;
+	sf::Sprite m_projectileSprite;
 
 	sf::Vector2f m_position;
 	sf::Vector2f m_velocity;
+
+	std::vector<Projectile*> m_projectiles;
 
 	float m_maxSpeed, m_boostSpeed, m_angle, m_maxVelocity, m_impulseX, m_impulseY, m_friction;
 

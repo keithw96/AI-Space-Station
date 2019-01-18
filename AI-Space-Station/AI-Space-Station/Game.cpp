@@ -276,39 +276,74 @@ void Game::loadSprites()
 void Game::determineTile(int type, int x, int y)
 {
 	if (type == 1) {
-		m_tileMap.push_back(Tile(sf::Vector2f(x, y), m_black_tileSprite));
+		m_tileMap.push_back(Tile(sf::Vector2f(x, y), m_black_tileSprite, type));
 	}
 	if (type == 2) {
-		m_tileMap.push_back(Tile(sf::Vector2f(x, y), m_verticalTileSprite));
+		m_tileMap.push_back(Tile(sf::Vector2f(x, y), m_verticalTileSprite, type));
 	}
 	if (type == 3) {
-		m_tileMap.push_back(Tile(sf::Vector2f(x, y), m_horizontalTileSprite));
+		m_tileMap.push_back(Tile(sf::Vector2f(x, y), m_horizontalTileSprite, type));
 	}
 	if (type == 4) {
-		m_tileMap.push_back(Tile(sf::Vector2f(x, y), m_topLeftTileSprite));
+		m_tileMap.push_back(Tile(sf::Vector2f(x, y), m_topLeftTileSprite, type));
 	}
 	if (type == 5) {
-		m_tileMap.push_back(Tile(sf::Vector2f(x, y), m_topRightTileSprite));
+		m_tileMap.push_back(Tile(sf::Vector2f(x, y), m_topRightTileSprite, type));
 	}
 	if (type == 6) {
-		m_tileMap.push_back(Tile(sf::Vector2f(x, y), m_bottomLeftTileSprite));
+		m_tileMap.push_back(Tile(sf::Vector2f(x, y), m_bottomLeftTileSprite, type));
 	}
 	if (type == 7) {
-		m_tileMap.push_back(Tile(sf::Vector2f(x, y), m_bottomRightTileSprite));
+		m_tileMap.push_back(Tile(sf::Vector2f(x, y), m_bottomRightTileSprite, type));
 	}
 	if (type == 8) {
-		m_tileMap.push_back(Tile(sf::Vector2f(x, y), m_tileSprite));
+		m_tileMap.push_back(Tile(sf::Vector2f(x, y), m_tileSprite, type));
 	}
 	if (type == 9) {
-		m_tileMap.push_back(Tile(sf::Vector2f(x, y), m_tJunctionLeftSprite));
+		m_tileMap.push_back(Tile(sf::Vector2f(x, y), m_tJunctionLeftSprite, type));
 	}
 	if (type == 10) {
-		m_tileMap.push_back(Tile(sf::Vector2f(x, y), m_tJunctionRightSprite));
+		m_tileMap.push_back(Tile(sf::Vector2f(x, y), m_tJunctionRightSprite, type));
 	}
 	if (type == 11) {
-		m_tileMap.push_back(Tile(sf::Vector2f(x, y), m_tJunctionUpSprite));
+		m_tileMap.push_back(Tile(sf::Vector2f(x, y), m_tJunctionUpSprite, type));
 	}
 	if (type == 12) {
-		m_tileMap.push_back(Tile(sf::Vector2f(x, y), m_tJunctionDownSprite));
+		m_tileMap.push_back(Tile(sf::Vector2f(x, y), m_tJunctionDownSprite, type));
 	}
 }
+
+//void Game::Game::loadAdjacents()
+//{
+//	for (int i = 0; i < 32; i++)
+//	{
+//		for (int j = 0; j < 32; j++)
+//		{
+//			if (newMap[sf::Vector2f(j, i)].m_type > 1)
+//			{
+//				if (j - 1 > 0)
+//				{
+//					if (m_tileMap[j - 1, i].m_type != 1)
+//					{
+//						m_tileMap[j, i].adjacents.push_back(&m_tileMap[j - 1, i]);
+//					}
+//
+//					if (m_tileMap[j + 1, i].m_type > 1)
+//					{
+//						m_tileMap[j, i].adjacents.push_back(&m_tileMap[j + 1, i]);
+//					}
+//
+//					if (m_tileMap[j, i - 1].m_type != 1)
+//					{
+//						m_tileMap[j, i].adjacents.push_back(&m_tileMap[j, i - 1]);
+//					}
+//
+//					if (m_tileMap[j, i + 1].m_type > 1)
+//					{
+//						m_tileMap[j, i].adjacents.push_back(&m_tileMap[j, i + 1]);
+//					}
+//				}
+//			}
+//		}
+//	}
+//}
