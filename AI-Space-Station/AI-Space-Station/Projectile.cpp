@@ -25,12 +25,14 @@ void Projectile::Update(sf::Time deltaTime, sf::Vector2f playerPos)
 	{
 		count++;
 		Homing(playerPos);
-	}
 
-	if (count >= 300)
-	{
-		m_alive = false;
+		if (count >= 200)
+		{
+			m_alive = false;
+		}
 	}
+	
+	
 }
 
 void Projectile::Render(sf::RenderWindow *window, sf::Vector2f scale)

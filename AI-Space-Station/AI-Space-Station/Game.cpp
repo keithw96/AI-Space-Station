@@ -39,10 +39,9 @@ Game::Game() :
 		}
 	}
 
-	m_nestArr.push_back(AlienNest(sf::Vector2f(4260, 812), m_nestSprite, m_projectileSprite));
-	m_nestArr.push_back(AlienNest(sf::Vector2f(1061, 1557), m_nestSprite, m_projectileSprite));
+	m_nestArr.push_back(AlienNest(sf::Vector2f(4260, 812), m_nestSprite, m_projectileSprite, m_predatorSprite));
+	m_nestArr.push_back(AlienNest(sf::Vector2f(1061, 1557), m_nestSprite, m_projectileSprite, m_predatorSprite));
 
-	m_predator = new Predator(sf::Vector2f(4269, 3462), m_predatorSprite);
 	m_splash = new Splash();
 	m_license = new License();
 	m_player = new Player();
@@ -124,6 +123,9 @@ void Game::update(sf::Time deltaTime)
 		{
 			m_nestArr[i].update(deltaTime, m_player->getPosition());
 		}
+
+		
+
 		break;
 	case GameState::CONTROLS:
 
@@ -191,7 +193,6 @@ void Game::render()
 		}
 
 		m_player->render(m_window, sf::Vector2f(1.0f, 1.0f));
-		m_predator->render(&m_window, sf::Vector2f(1.0, 1.0));
 		//
 		m_powerup->render(m_window);
 
@@ -205,11 +206,10 @@ void Game::render()
 
 		for (int i = 0; i < m_nestArr.size(); i++)
 		{
-			m_nestArr[i].render(&m_window, sf::Vector2f(1.0, 1.0));
+			m_nestArr[i].render(&m_window, sf::Vector2f(2.0, 2.0));
 		}
 
 		m_miniPlayer->render(m_window, sf::Vector2f(10.0f, 10.0f));
-		m_predator->render(&m_window, sf::Vector2f(10.0, 10.0));
 		//
 		m_powerup->render(m_window);
 		break;
@@ -258,8 +258,9 @@ void Game::loadSprites()
 	m_black_tileTexture.loadFromFile("ASSETS/Textures/black_tile.png");
 	m_tileTexture.loadFromFile("ASSETS/Textures/tile.png");
 	m_nestTexture.loadFromFile("ASSETS/Textures/alien_maker.png");
-	m_predatorTexture.loadFromFile("ASSETS/Textures/predator.png");
+	m_predatorTexture.loadFromFile("ASSETS/Textures/predatorMine.png");
 	m_projectileTexture.loadFromFile("ASSETS/Textures/laserBall.png");
+	
 
 	m_black_tileSprite.setTexture(m_black_tileTexture);
 	m_bottomLeftTileSprite.setTexture(m_bottomLeftTileTexture);
