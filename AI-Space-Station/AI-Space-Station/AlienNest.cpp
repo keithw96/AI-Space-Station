@@ -19,9 +19,9 @@ void AlienNest::update(sf::Time deltaTime, sf::Vector2f playerPos)
 
 	for (int i = 0; i < m_projectiles.size(); i++)
 	{
-		m_projectiles[i]->Update(deltaTime, playerPos);
+		m_projectiles[i]->update(deltaTime, playerPos);
 
-		if (m_projectiles[i]->m_alive == false)
+		if (m_projectiles[i]->getAlive() == false)
 		{
 			m_projectiles[i]->~Projectile();
 			m_projectiles[i] = nullptr;
@@ -37,6 +37,6 @@ void AlienNest::render(sf::RenderWindow *window, sf::Vector2f scale)
 	window->draw(m_sprite);
 	for (auto& p : m_projectiles)
 	{
-		p->Render(window, scale);
+		p->render(window, scale);
 	}
 }

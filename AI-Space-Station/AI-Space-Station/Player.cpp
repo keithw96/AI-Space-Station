@@ -32,33 +32,43 @@ Player::~Player()
 /// </summary>
 void Player::init()
 {
-	loadTextures();
-
+	//
+	loadAssets();
+	//
 	m_position.x = 2750;
 	m_position.y = 5175;
-
-	m_velocity.x = 0;
-	m_velocity.y = 0;
-
+	//
 	m_maxSpeed = 15;
 	m_boostSpeed = 10;
 	m_angle = 0;
 	m_maxVelocity = 5;
-
+	//
 	m_health = 100;
 	m_animatedColour = 0;
-
+	//
 	m_iColour = 1;
 	m_bColour = 1;
-
+	//
 	m_powerupTime = 0;
-
+	//
 	//m_projectileSprite.setTexture(m_projectileTxt);
 	m_sprite.setTexture(m_texture);
 	m_sprite.setPosition(m_position);
 	m_sprite.setOrigin(m_sprite.getTextureRect().width / 2, m_sprite.getTextureRect().height / 2);
 	m_sprite.setRotation(0);
-
+	//
+	//m_projectileSprite.setTexture(m_projectileText);
+	//
+	m_score = 0;
+	//
+	m_text = "Score: " + std::to_string(m_score);
+	//
+	m_scoreText.setString(m_text);
+	m_scoreText.setFont(m_font);
+	m_scoreText.setCharacterSize(25);
+	//
+	
+	//
 	m_invincible = false;
 	m_boosted = false;
 	m_mapCreated = false;
@@ -66,26 +76,36 @@ void Player::init()
 	m_right = false;
 	m_down = false;
 	m_left = false;
+	m_display = false;
+	m_shoot = false;
 }
 
 /// <summary>
 /// 
 /// </summary>
-void Player::loadTextures()
+void Player::loadAssets()
 {
 	if (!m_texture.loadFromFile("ASSETS/Textures/PlayerShip.png"))
 	{
 		std::cout << "Error! Unable to load PlayerShip.png from game files!" << std::endl;
 	}
 
-	m_projectileTxt.loadFromFile("ASSETS/Textures/playerLaserBall.png");
+	if (!m_projectileText.loadFromFile("ASSETS/Textures/PlayerProjectile.png"))
+	{
+		std::cout << "Error! Unable to load PlayerProjectile.png from game files!" << std::endl;
+	}
+
+	if (!m_font.loadFromFile("ASSETS/Fonts/arial.ttf"))
+	{
+		std::cout << "Error! Unable to load arial.ttf from game files!" << std::endl;
+	}
 }
 
 /// <summary>
 /// 
 /// </summary>
 /// <param name="deltaTime"></param>
-void Player::update(sf::Time deltaTime, sf::View & v, PowerUp * powerup, std::vector<Tile> &tilemap, int playerNumber)
+void Player::update(sf::Time deltaTime, sf::View & v, PowerUp * powerup, std::vector<Tile> &tilemap,  int playerNumber)
 {
 	//
 	m_position = m_sprite.getPosition();
@@ -107,14 +127,29 @@ void Player::update(sf::Time deltaTime, sf::View & v, PowerUp * powerup, std::ve
 	//
 	addVelocity();
 	//
+	shootBullet();
+	//
 	powerupCollision(powerup);
+	//
 	tileCollision(m_boundaryTiles, playerNumber);
-
+	//
+	
+	
+	//
 	m_sprite.setPosition(m_position);
+
+	//
+	m_scoreText.setPosition(sf::Vector2f(m_position.x - 650, m_position.y - 520));
 	//
 	if (playerNumber == 1)
 	{
 		v.setCenter(m_sprite.getPosition());
+		//
+		m_text = "Score: " + std::to_string(m_score);
+		//
+		m_scoreText.setString(m_text);
+		//
+		m_display = true;
 	}
 }
 
@@ -122,10 +157,19 @@ void Player::update(sf::Time deltaTime, sf::View & v, PowerUp * powerup, std::ve
 /// 
 /// </summary>
 /// <param name="window"></param>
-void Player::render(sf::RenderWindow& window, sf::Vector2f scale)
+void Player::render(sf::RenderWindow *window, sf::Vector2f scale)
 {
 	m_sprite.setScale(scale);
-	window.draw(m_sprite);
+	window->draw(m_sprite);
+	//
+	if (m_display == true)
+	{
+		window->draw(m_scoreText);
+	}
+
+	//
+	//m_playerBullet->render(window, scale);
+	
 }
 
 /// <summary>
@@ -156,6 +200,8 @@ void Player::addVelocity()
 		//
 		m_angle = 0;
 		m_position.y -= speed;
+		//
+		//m_projectileVel = sf::Vector2f(0, -20);
 		/*m_position.x += (sin(m_sprite.getRotation() * (3.14159265 / 180)) * speed);
 		m_position.y += (-cos(m_sprite.getRotation() * (3.14159265 / 180)) * speed);
 
@@ -187,6 +233,8 @@ void Player::addVelocity()
 		//
 		m_angle = 180;
 		m_position.y += speed;
+		//
+		//m_projectileVel = sf::Vector2f(0, 20);
 		/*m_position.x += (sin(m_sprite.getRotation() * (3.14159265 / 180)) * speed);
 		m_position.y += (-cos(m_sprite.getRotation() * (3.14159265 / 180)) * speed);
 
@@ -218,7 +266,8 @@ void Player::addVelocity()
 		//
 		m_angle = 270;
 		m_position.x -= speed;
-
+		//
+		//m_projectileVel = sf::Vector2f(-20, 0);
 		/*m_angle -= 5;
 		std::cout << "Left" << std::endl;*/
 	}
@@ -245,6 +294,8 @@ void Player::addVelocity()
 		//
 		m_angle = 90;
 		m_position.x += speed;
+		//
+		//m_projectileVel = sf::Vector2f(0, 20);
 		/*m_angle += 5;
 		std::cout << "Right" << std::endl;*/
 	}
@@ -253,9 +304,38 @@ void Player::addVelocity()
 }
 
 //
-void Player::workerCollision()
+void Player::shootBullet()
+{
+	/*if (sf::Keyboard::isKeyPressed(m_keyboard.Space))
+	{
+		m_shoot = true;
+	}
+
+	if (m_shoot == true)
+	{
+
+		m_playerBullet = new Projectile(m_position, m_projectileSprite, false);
+		m_playerBullet->setAlive(true);
+		m_shoot = false;
+	}*/
+}
+
+//
+void Player::workerCollision(Worker * worker, int playerNumber)
 {
 
+	if (playerNumber == 1)
+	{
+		if (m_sprite.getGlobalBounds().intersects(worker->getSprite().getGlobalBounds()))
+		{
+			//
+			if (worker->getActive() == true)
+			{
+				m_score += 100;
+				worker->setActive(false);
+			}// End if
+		}//End if
+	}
 }
 
 //
@@ -325,10 +405,7 @@ void Player::tileCollision(std::vector<Tile> &tilemap, int playerNumber)
 			if (tilemap[i].getType() == 1)
 			{
 				//
-				if (m_sprite.getGlobalBounds().intersects(tilemap[i].getSprite().getGlobalBounds()))/*m_sprite.getPosition().x + m_sprite.getGlobalBounds().width >= tilemap[i].getSprite().getPosition().x &&
-					m_sprite.getPosition().x <= tilemap[i].getSprite().getPosition().x + tilemap[i].getSprite().getGlobalBounds().width &&
-					m_sprite.getPosition().y + m_sprite.getGlobalBounds().height >= tilemap[i].getSprite().getPosition().y &&
-					m_sprite.getPosition().y <= tilemap[i].getSprite().getPosition().y + tilemap[i].getSprite().getGlobalBounds().height)*/
+				if (m_sprite.getGlobalBounds().intersects(tilemap[i].getSprite().getGlobalBounds()))
 				{
 					std::cout << "Collided" << std::endl;
 

@@ -1,3 +1,4 @@
+
 //
 //
 //
@@ -25,7 +26,7 @@ public:
 	~PowerUp();
 
 	void update(sf::Time deltaTime);
-	void render(sf::RenderWindow& window);
+	void render(sf::RenderWindow& window, sf::Vector2f scale);
 
 	int getType();
 

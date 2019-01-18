@@ -1,7 +1,14 @@
+// Modified by Brandon Seah-Dempsey
+// At 14:37 18 January 2019
+
 #include "Projectile.h"
 
-
-
+/// <summary>
+/// 
+/// </summary>
+/// <param name="pos"></param>
+/// <param name="sprite"></param>
+/// <param name="homing"></param>
 Projectile::Projectile(sf::Vector2f pos, sf::Sprite sprite, bool homing)
 {
 	m_position = pos;
@@ -14,17 +21,26 @@ Projectile::Projectile(sf::Vector2f pos, sf::Sprite sprite, bool homing)
 	m_sprite.setOrigin(sf::Vector2f(m_sprite.getTextureRect().width / 2, m_sprite.getTextureRect().height / 2));
 }
 
+
+/// <summary>
+/// 
+/// </summary>
 Projectile::~Projectile()
 {
 
 }
 
-void Projectile::Update(sf::Time deltaTime, sf::Vector2f playerPos)
+/// <summary>
+/// 
+/// </summary>
+/// <param name="deltaTime"></param>
+/// <param name="playerPos"></param>
+void Projectile::update(sf::Time deltaTime, sf::Vector2f playerPos)
 {
 	if (m_homing && m_alive)
 	{
 		count++;
-		Homing(playerPos);
+		homing(playerPos);
 	}
 
 	if (count >= 300)
@@ -33,7 +49,12 @@ void Projectile::Update(sf::Time deltaTime, sf::Vector2f playerPos)
 	}
 }
 
-void Projectile::Render(sf::RenderWindow *window, sf::Vector2f scale)
+/// <summary>
+/// 
+/// </summary>
+/// <param name="window"></param>
+/// <param name="scale"></param>
+void Projectile::render(sf::RenderWindow *window, sf::Vector2f scale)
 {
 	if (m_alive)
 	{
@@ -41,7 +62,11 @@ void Projectile::Render(sf::RenderWindow *window, sf::Vector2f scale)
 	}
 }
 
-void Projectile::Homing(sf::Vector2f playerPos)
+/// <summary>
+/// 
+/// </summary>
+/// <param name="playerPos"></param>
+void Projectile::homing(sf::Vector2f playerPos)
 {
 	if (m_position.x < playerPos.x)
 	{
@@ -64,4 +89,36 @@ void Projectile::Homing(sf::Vector2f playerPos)
 	}
 
 	m_sprite.setPosition(m_position);
+}
+
+/// <summary>
+/// 
+/// </summary>
+/// <param name="velocity"></param>
+void Projectile::move(sf::Vector2f velocity)
+{
+
+	m_position.x += velocity.x;
+	m_position.y += velocity.y;
+
+	m_sprite.setPosition(m_position);
+}
+
+
+/// <summary>
+/// 
+/// </summary>
+/// <returns></returns>
+bool Projectile::getAlive()
+{
+	return m_alive;
+}
+
+/// <summary>
+/// 
+/// </summary>
+/// <param name="alive"></param>
+void Projectile::setAlive(bool alive)
+{
+	m_alive = alive;
 }

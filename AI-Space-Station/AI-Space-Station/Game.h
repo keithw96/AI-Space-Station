@@ -18,12 +18,14 @@
 #include "AlienNest.h"
 #include "Predator.h"
 
+
 //
 class Splash;
 class License;
 class Player;
 class PowerUp;
 class AlienNest;
+class Worker;
 
 enum class GameState
 {
@@ -157,12 +159,15 @@ private:
 	Splash * m_splash;
 	License * m_license;
 	Player * m_player;
-	Player *m_miniPlayer;
+	Player * m_miniPlayer;
 	PowerUp * m_powerup;
+	Worker * m_worker[10];
+	std::vector<Worker> m_workers;
 };
 
 #include "SplashScreen.h"
 #include "LicenseScreen.h"
 #include "Player.h"
 #include "Power-Up.h"
+#include "Worker.h"
 #endif // !GAME_H

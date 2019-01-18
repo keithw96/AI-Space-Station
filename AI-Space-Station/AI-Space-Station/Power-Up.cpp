@@ -28,7 +28,7 @@ void PowerUp::init()
 {
 	loadTextures();
 
-	m_position = sf::Vector2f(350, 350);
+	m_position = sf::Vector2f(1050, 3350);
 	m_sprite.setOrigin(50, 50);
 
 	m_texture = m_textureTypeOne;
@@ -89,8 +89,8 @@ void PowerUp::respawn()
 	if (m_respawnTime >= 40 && m_active == false)
 	{
 
-		m_position.x = rand() % 700 + 10;
-		m_position.y = rand() % 700 + 10;
+		/*m_position.x = rand() % 700 + 10;
+		m_position.y = rand() % 700 + 10;*/
 		m_type = rand() % 20 + 1;
 		
 
@@ -117,10 +117,11 @@ void PowerUp::respawn()
 /// 
 /// </summary>
 /// <param name="window"></param>
-void PowerUp::render(sf::RenderWindow& window)
+void PowerUp::render(sf::RenderWindow& window, sf::Vector2f scale)
 {
 	if (m_active == true)
 	{
+		m_sprite.setScale(scale);
 		window.draw(m_sprite);
 	}
 }

@@ -48,6 +48,24 @@ Game::Game() :
 	m_player = new Player();
 	m_miniPlayer = new Player();
 	m_powerup = new PowerUp();
+	//
+	//
+	m_worker[0] = new Worker(sf::Vector2f(700, 1250));
+	m_worker[1] = new Worker(sf::Vector2f(1200, 1250));
+	m_worker[2] = new Worker(sf::Vector2f(3800, 3800));
+	m_worker[3] = new Worker(sf::Vector2f(4700, 3800));
+	m_worker[4] = new Worker(sf::Vector2f(900, 3650));
+	m_worker[5] = new Worker(sf::Vector2f(1200, 3650));
+	m_worker[6] = new Worker(sf::Vector2f(4700, 450));
+	m_worker[7] = new Worker(sf::Vector2f(4700, 1100));
+	m_worker[8] = new Worker(sf::Vector2f(3900, 450));
+	m_worker[9] = new Worker(sf::Vector2f(3900, 1100));
+	//
+
+	for (int i = 0; i < 10; i++)
+	{
+		//m_workers->push_back(m_worker[i]);
+	}
 }
 
 /// <summary>
@@ -113,16 +131,27 @@ void Game::update(sf::Time deltaTime)
 		break;
 	case GameState::GAME:
 		//
-
 		m_player->update(deltaTime, m_view, m_powerup, m_tileMap, 1);
+		//
+		for (int i = 0; i < 10; i++)
+		{
+			m_player->workerCollision(m_worker[i], 1);
+		}
+		//
 		m_miniPlayer->update(deltaTime, m_view, m_powerup, m_tileMap, 2);
 
 		m_miniPlayer->setPosition(m_player->getPosition());
-
+		//
 		m_powerup->update(deltaTime);
+		//
 		for (int i = 0; i < m_nestArr.size(); i++)
 		{
 			m_nestArr[i].update(deltaTime, m_player->getPosition());
+		}
+		//
+		for (int i = 0; i < 10; i++)
+		{
+			m_worker[i]->update(deltaTime);
 		}
 		break;
 	case GameState::CONTROLS:
@@ -175,28 +204,33 @@ void Game::render()
 
 		break;
 	case GameState::GAME:
+		//game render
 		//
-
-//game render
 		m_window.setView(m_view);
-
+		//
 		for (int i = 0; i < m_tileMap.size(); i++)
 		{
 			m_tileMap[i].draw(&m_window);
 		}
-
+		//
 		for (int i = 0; i < m_nestArr.size(); i++)
 		{
 			m_nestArr[i].render(&m_window, sf::Vector2f(1.0, 1.0));
 		}
-
-		m_player->render(m_window, sf::Vector2f(1.0f, 1.0f));
-		m_predator->render(&m_window, sf::Vector2f(1.0, 1.0));
 		//
-		m_powerup->render(m_window);
+		m_player->render(&m_window, sf::Vector2f(1.0f, 1.0f));
+		//
+		m_predator->render(&m_window, sf::Vector2f(1.0f, 1.0f));
+		//
+		for (int i = 0; i < 10; i++)
+		{
+			m_worker[i]->render(m_window, sf::Vector2f(0.5f, 0.5f));
+		}
+		//
+		m_powerup->render(m_window, sf::Vector2f(0.75f, 0.75f));
 
+		//
 		m_window.setView(miniMap);
-
 		//minimap render
 		for (int i = 0; i < m_tileMap.size(); i++)
 		{
@@ -207,11 +241,17 @@ void Game::render()
 		{
 			m_nestArr[i].render(&m_window, sf::Vector2f(1.0, 1.0));
 		}
-
-		m_miniPlayer->render(m_window, sf::Vector2f(10.0f, 10.0f));
+		//
+		m_miniPlayer->render(&m_window, sf::Vector2f(10.0f, 10.0f));
+		//
+		for (int i = 0; i < 10; i++)
+		{
+			m_worker[i]->render(m_window, sf::Vector2f(2.5f, 2.5f));
+		}
+		//
 		m_predator->render(&m_window, sf::Vector2f(10.0, 10.0));
 		//
-		m_powerup->render(m_window);
+		m_powerup->render(m_window, sf::Vector2f(2.5f, 2.5f));
 		break;
 	case GameState::CONTROLS:
 
@@ -243,6 +283,9 @@ GameState Game::getGameState()
 	return gameState;
 }
 
+/// <summary>
+/// 
+/// </summary>
 void Game::loadSprites()
 {
 	m_bottomLeftTileTexture.loadFromFile("ASSETS/Textures/bottom_left_corner.png");
@@ -278,6 +321,12 @@ void Game::loadSprites()
 	m_projectileSprite.setTexture(m_projectileTexture);
 }
 
+/// <summary>
+/// 
+/// </summary>
+/// <param name="type"></param>
+/// <param name="x"></param>
+/// <param name="y"></param>
 void Game::determineTile(int type, int x, int y)
 {
 	if (type == 0) {
