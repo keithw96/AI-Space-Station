@@ -1,5 +1,11 @@
 #include "Predator.h"
 
+/// <summary>
+/// constructor
+/// </summary>
+/// <param name="pos"></param>
+/// <param name="sprite"></param>
+/// <param name="roomCenter"></param>
 Predator::Predator(sf::Vector2f pos, sf::Sprite sprite, sf::Vector2f roomCenter)
 {
 	m_startPos = pos;
@@ -12,6 +18,11 @@ Predator::Predator(sf::Vector2f pos, sf::Sprite sprite, sf::Vector2f roomCenter)
 	m_sprite.setOrigin(sf::Vector2f(m_sprite.getTextureRect().width / 2, m_sprite.getTextureRect().height / 2));
 }
 
+/// <summary>
+/// updates the predators movement and rotation
+/// </summary>
+/// <param name="deltaTime"></param>
+/// <param name="playerPos"></param>
 void Predator::update(sf::Time deltaTime, sf::Vector2f playerPos)
 {
 	if (m_roomCenter.x - playerPos.x < 400 && m_roomCenter.x - playerPos.x > -400 && m_roomCenter.y - playerPos.y < 400 && m_roomCenter.y - playerPos.y > -400)
@@ -65,6 +76,11 @@ void Predator::update(sf::Time deltaTime, sf::Vector2f playerPos)
 	m_sprite.setPosition(m_position);
 }
 
+/// <summary>
+/// renders the predator
+/// </summary>
+/// <param name="window"></param>
+/// <param name="scale"></param>
 void Predator::render(sf::RenderWindow *window, sf::Vector2f scale)
 {
 	m_sprite.setScale(scale);

@@ -11,19 +11,25 @@
 
 #include "Power-Up.h"
 
-//
+/// <summary>
+/// constructor
+/// </summary>
 PowerUp::PowerUp()
 {
 	init();
 }
 
-//
+/// <summary>
+/// deconstructor
+/// </summary>
 PowerUp::~PowerUp()
 {
 
 }
 
-//
+/// <summary>
+/// intialises the power ups variables
+/// </summary>
 void PowerUp::init()
 {
 	loadTextures();
@@ -38,7 +44,9 @@ void PowerUp::init()
 	m_active = true;
 }
 
-//
+/// <summary>
+/// loads the power ups texture depending on what power up it is
+/// </summary>
 void PowerUp::loadTextures()
 {
 	//
@@ -55,7 +63,7 @@ void PowerUp::loadTextures()
 }
 
 /// <summary>
-/// 
+/// updates the powers lifetime timer
 /// </summary>
 /// <param name="deltaTime"></param>
 void PowerUp::update(sf::Time deltaTime)
@@ -71,19 +79,16 @@ void PowerUp::update(sf::Time deltaTime)
 	{
 		m_active = false;
 	}
-
-	//std::cout << m_lifeTime << std::endl;
 }
 
 /// <summary>
-/// 
+/// handles the respawn timer for the power up
 /// </summary>
 void PowerUp::respawn()
 {
 	if (m_active == false)
 	{
 		m_respawnTime++;
-		//std::cout << m_respawnTime << std::endl;
 	}
 
 	if (m_respawnTime >= 40 && m_active == false)
@@ -114,7 +119,7 @@ void PowerUp::respawn()
 }
 
 /// <summary>
-/// 
+/// renders the powerup if it is active
 /// </summary>
 /// <param name="window"></param>
 void PowerUp::render(sf::RenderWindow& window)
@@ -126,7 +131,7 @@ void PowerUp::render(sf::RenderWindow& window)
 }
 
 /// <summary>
-/// 
+/// returns the type of the powerup
 /// </summary>
 /// <returns></returns>
 int PowerUp::getType()
@@ -135,7 +140,7 @@ int PowerUp::getType()
 }
 
 /// <summary>
-/// 
+/// returns the powerups sprite
 /// </summary>
 /// <returns></returns>
 sf::Sprite PowerUp::getSprite()
@@ -144,7 +149,7 @@ sf::Sprite PowerUp::getSprite()
 }
 
 /// <summary>
-/// 
+/// sets the powerup to active
 /// </summary>
 /// <param name="active"></param>
 void PowerUp::setActive(bool active)
@@ -153,7 +158,7 @@ void PowerUp::setActive(bool active)
 }
 
 /// <summary>
-/// 
+/// gets the avtive bool of the power up
 /// </summary>
 /// <returns></returns>
 bool PowerUp::getActive()
@@ -162,7 +167,7 @@ bool PowerUp::getActive()
 }
 
 /// <summary>
-/// 
+/// sets the position of the powerup
 /// </summary>
 /// <param name="position"></param>
 void PowerUp::setPosition(sf::Vector2f position)
@@ -171,7 +176,7 @@ void PowerUp::setPosition(sf::Vector2f position)
 }
 
 /// <summary>
-/// 
+/// returns the position of the powerup
 /// </summary>
 /// <returns></returns>
 sf::Vector2f PowerUp::getPosition()

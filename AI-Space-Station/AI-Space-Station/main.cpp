@@ -12,7 +12,7 @@
 #include "Game.h"
 
 /// <summary>
-/// 
+/// main entry point
 /// </summary>
 /// <returns></returns>
 int main()

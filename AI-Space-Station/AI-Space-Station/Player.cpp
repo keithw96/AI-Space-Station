@@ -12,7 +12,7 @@
 #include "Player.h"
 
 /// <summary>
-/// 
+/// constructor
 /// </summary>
 Player::Player()
 {
@@ -20,7 +20,7 @@ Player::Player()
 }
 
 /// <summary>
-/// 
+/// deconstructor
 /// </summary>
 Player::~Player()
 {
@@ -28,7 +28,7 @@ Player::~Player()
 }
 
 /// <summary>
-/// 
+/// initialises the player and its variables
 /// </summary>
 void Player::init()
 {
@@ -69,7 +69,7 @@ void Player::init()
 }
 
 /// <summary>
-/// 
+/// loads the players texture and outputs and error if it cant find the file
 /// </summary>
 void Player::loadTextures()
 {
@@ -82,7 +82,7 @@ void Player::loadTextures()
 }
 
 /// <summary>
-/// 
+/// Updates the player's movements and collisions
 /// </summary>
 /// <param name="deltaTime"></param>
 void Player::update(sf::Time deltaTime, sf::View & v, PowerUp * powerup, std::vector<Tile> &tilemap, int playerNumber)
@@ -119,7 +119,7 @@ void Player::update(sf::Time deltaTime, sf::View & v, PowerUp * powerup, std::ve
 }
 
 /// <summary>
-/// 
+/// renders the player
 /// </summary>
 /// <param name="window"></param>
 void Player::render(sf::RenderWindow& window, sf::Vector2f scale)
@@ -129,7 +129,7 @@ void Player::render(sf::RenderWindow& window, sf::Vector2f scale)
 }
 
 /// <summary>
-/// 
+/// increases the players speed if the up key is pressed
 /// </summary>
 void Player::addVelocity()
 {
@@ -156,13 +156,6 @@ void Player::addVelocity()
 		//
 		m_angle = 0;
 		m_position.y -= speed;
-		/*m_position.x += (sin(m_sprite.getRotation() * (3.14159265 / 180)) * speed);
-		m_position.y += (-cos(m_sprite.getRotation() * (3.14159265 / 180)) * speed);
-
-
-		m_moving = true;
-
-		//std::cout << "Up" << std::endl;*/
 	}
 
 	//
@@ -187,13 +180,6 @@ void Player::addVelocity()
 		//
 		m_angle = 180;
 		m_position.y += speed;
-		/*m_position.x += (sin(m_sprite.getRotation() * (3.14159265 / 180)) * speed);
-		m_position.y += (-cos(m_sprite.getRotation() * (3.14159265 / 180)) * speed);
-
-
-		m_moving = true;
-
-		//std::cout << "Up" << std::endl;*/
 	}
 
 	//
@@ -218,9 +204,6 @@ void Player::addVelocity()
 		//
 		m_angle = 270;
 		m_position.x -= speed;
-
-		/*m_angle -= 5;
-		std::cout << "Left" << std::endl;*/
 	}
 
 	//
@@ -245,8 +228,6 @@ void Player::addVelocity()
 		//
 		m_angle = 90;
 		m_position.x += speed;
-		/*m_angle += 5;
-		std::cout << "Right" << std::endl;*/
 	}
 
 	m_sprite.setRotation(m_angle);
@@ -277,7 +258,8 @@ void Player::enemyCollision()
 }
 
 /// <summary>
-/// 
+/// if the player's global bounds intersects the power up 
+/// the power up's active is set to false and the player gets the buff of the power up
 /// </summary>
 /// <param name="powerup"></param>
 void Player::powerupCollision(PowerUp * powerup)
@@ -312,7 +294,9 @@ void Player::powerupCollision(PowerUp * powerup)
 }
 
 /// <summary>
-/// 
+/// prevents the player from going out of bounds
+/// if the player intersects a black tile the player is pushed back 
+/// depending on the direction they were facing 
 /// </summary>
 /// <param name="tilemap"></param>
 void Player::tileCollision(std::vector<Tile> &tilemap, int playerNumber)
@@ -325,10 +309,7 @@ void Player::tileCollision(std::vector<Tile> &tilemap, int playerNumber)
 			if (tilemap[i].getType() == 1)
 			{
 				//
-				if (m_sprite.getGlobalBounds().intersects(tilemap[i].getSprite().getGlobalBounds()))/*m_sprite.getPosition().x + m_sprite.getGlobalBounds().width >= tilemap[i].getSprite().getPosition().x &&
-					m_sprite.getPosition().x <= tilemap[i].getSprite().getPosition().x + tilemap[i].getSprite().getGlobalBounds().width &&
-					m_sprite.getPosition().y + m_sprite.getGlobalBounds().height >= tilemap[i].getSprite().getPosition().y &&
-					m_sprite.getPosition().y <= tilemap[i].getSprite().getPosition().y + tilemap[i].getSprite().getGlobalBounds().height)*/
+				if (m_sprite.getGlobalBounds().intersects(tilemap[i].getSprite().getGlobalBounds()))
 				{
 					std::cout << "Collided" << std::endl;
 
@@ -360,7 +341,7 @@ void Player::tileCollision(std::vector<Tile> &tilemap, int playerNumber)
 }
 
 /// <summary>
-/// 
+/// creats a vector of the boundary tiles
 /// </summary>
 /// <param name="tilemap"></param>
 void Player::createBoundaryTileVector(std::vector<Tile> &tilemap)
@@ -385,7 +366,7 @@ void Player::createBoundaryTileVector(std::vector<Tile> &tilemap)
 }
 
 /// <summary>
-/// 
+/// animates the player if the player has picked up a power up
 /// </summary>
 void Player::powerupColourAnimate()
 {
@@ -431,7 +412,8 @@ void Player::powerupColourAnimate()
 }
 
 /// <summary>
-/// 
+/// timer for the powerup
+/// resets the invincible and boosted bools if the timer is 0
 /// </summary>
 void Player::powerupTime()
 {
@@ -452,7 +434,7 @@ void Player::powerupTime()
 }
 
 /// <summary>
-/// 
+/// returns the players position
 /// </summary>
 /// <returns></returns>
 sf::Vector2f Player::getPosition()
@@ -460,7 +442,10 @@ sf::Vector2f Player::getPosition()
 	return m_sprite.getPosition();
 }
 
-//
+/// <summary>
+/// sets the players position
+/// </summary>
+/// <param name="position"></param>
 void Player::setPosition(sf::Vector2f position)
 {
 	m_position = position;

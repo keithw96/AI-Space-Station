@@ -1,5 +1,13 @@
 #include "AlienNest.h"
 
+/// <summary>
+/// alien nest constructor
+/// takes in a starting position, sprite, sprite for its projectiles and a sprite for its predators
+/// </summary>
+/// <param name="pos"></param>
+/// <param name="sprite"></param>
+/// <param name="projectileSprite"></param>
+/// <param name="predatorSprite"></param>
 AlienNest::AlienNest(sf::Vector2f pos, sf::Sprite sprite, sf::Sprite projectileSprite, sf::Sprite predatorSprite)
 {
 	m_position = pos;
@@ -17,6 +25,13 @@ AlienNest::AlienNest(sf::Vector2f pos, sf::Sprite sprite, sf::Sprite projectileS
 	m_predators.push_back(pred2);
 }
 
+/// <summary>
+/// Alien Nest Update:
+/// updates the nests variables and the variables of its projectiles
+/// and predators
+/// </summary>
+/// <param name="deltaTime"></param>
+/// <param name="playerPos"></param>
 void AlienNest::update(sf::Time deltaTime, sf::Vector2f playerPos)
 {
 	if (m_position.x - playerPos.x < 300 && m_position.x - playerPos.x > -300 && m_position.y - playerPos.y < 300 && m_position.y - playerPos.y > -300 && m_projectiles.size() < 1)
@@ -44,6 +59,12 @@ void AlienNest::update(sf::Time deltaTime, sf::Vector2f playerPos)
 	}
 }
 
+/// <summary>
+/// Renders the nest and its predators 
+/// and projectiles 
+/// </summary>
+/// <param name="window"></param>
+/// <param name="scale"></param>
 void AlienNest::render(sf::RenderWindow *window, sf::Vector2f scale)
 {
 	m_sprite.setScale(scale);

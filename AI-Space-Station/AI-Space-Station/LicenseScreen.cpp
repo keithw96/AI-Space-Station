@@ -12,7 +12,7 @@
 #include "LicenseScreen.h"
 
 /// <summary>
-/// 
+/// constructor
 /// </summary>
 License::License()
 {
@@ -20,7 +20,7 @@ License::License()
 }
 
 /// <summary>
-/// 
+/// deconstructor
 /// </summary>
 License::~License()
 {
@@ -28,7 +28,7 @@ License::~License()
 }
 
 /// <summary>
-/// 
+/// intitialises the License screens vairables 
 /// </summary>
 void License::init()
 {
@@ -45,7 +45,7 @@ void License::init()
 }
 
 /// <summary>
-/// 
+/// loads the license screens background
 /// </summary>
 void License::loadTextures()
 {
@@ -57,7 +57,7 @@ void License::loadTextures()
 }
 
 /// <summary>
-/// 
+/// updates the timer for the licence screen
 /// </summary>
 /// <param name="deltaTime"></param>
 void License::update(sf::Time deltaTime)
@@ -66,7 +66,7 @@ void License::update(sf::Time deltaTime)
 }
 
 /// <summary>
-/// 
+/// renders the licence screen
 /// </summary>
 /// <param name="window"></param>
 void License::render(sf::RenderWindow& window)
@@ -76,7 +76,7 @@ void License::render(sf::RenderWindow& window)
 
 
 /// <summary>
-/// 
+/// returns the timer for the licence screen
 /// </summary>
 /// <returns></returns>
 int License::getScreenTime()

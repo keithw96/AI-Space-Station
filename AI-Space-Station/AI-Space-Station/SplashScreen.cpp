@@ -12,7 +12,7 @@
 #include "SplashScreen.h"
 
 /// <summary>
-/// 
+/// constructor 
 /// </summary>
 Splash::Splash()
 {
@@ -20,7 +20,7 @@ Splash::Splash()
 }
 
 /// <summary>
-/// 
+/// deconstructor
 /// </summary>
 Splash::~Splash()
 {
@@ -28,7 +28,7 @@ Splash::~Splash()
 }
 
 /// <summary>
-/// 
+/// intiialises the splash screens variables
 /// </summary>
 void Splash::init()
 {
@@ -63,7 +63,7 @@ void Splash::init()
 }
 
 /// <summary>
-/// 
+/// loads the arial font used in the splash screen
 /// </summary>
 void Splash::loadFonts()
 {
@@ -74,7 +74,7 @@ void Splash::loadFonts()
 }
 
 /// <summary>
-/// /
+/// updates the splash screen
 /// </summary>
 /// <param name="deltaTime"></param>
 void Splash::update(sf::Time deltaTime)
@@ -120,7 +120,7 @@ void Splash::update(sf::Time deltaTime)
 }
 
 /// <summary>
-/// 
+/// renders the text 
 /// </summary>
 /// <param name="window"></param>
 void Splash::render(sf::RenderWindow& window)
@@ -131,7 +131,7 @@ void Splash::render(sf::RenderWindow& window)
 }
 
 /// <summary>
-/// 
+/// returns the timer for the screen
 /// </summary>
 /// <returns></returns>
 int Splash::getScreenTime()

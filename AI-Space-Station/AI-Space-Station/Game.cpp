@@ -12,7 +12,7 @@
 #include "Game.h"
 
 /// <summary>
-/// 
+/// constructor
 /// </summary>
 Game::Game() :
 	m_window{ sf::VideoMode{2500, 2000, 32}, "AI Space Station"},
@@ -50,7 +50,7 @@ Game::Game() :
 }
 
 /// <summary>
-/// 
+/// deconstructor
 /// </summary>
 Game::~Game()
 {
@@ -79,6 +79,10 @@ void Game::run()
 	}
 }
 
+/// <summary>
+/// updates the current gamestate
+/// </summary>
+/// <param name="deltaTime"></param>
 void Game::update(sf::Time deltaTime)
 {
 	//
@@ -124,8 +128,6 @@ void Game::update(sf::Time deltaTime)
 			m_nestArr[i].update(deltaTime, m_player->getPosition());
 		}
 
-		
-
 		break;
 	case GameState::CONTROLS:
 
@@ -138,7 +140,9 @@ void Game::update(sf::Time deltaTime)
 	m_window.display();
 }
 
-//
+/// <summary>
+/// checks for events that close the window 
+/// </summary>
 void Game::processEvents()
 {
 	sf::Event event;
@@ -158,7 +162,9 @@ void Game::processEvents()
 	}
 }
 
-//
+/// <summary>
+/// renders the current gamestate
+/// </summary>
 void Game::render()
 {
 	//
@@ -226,7 +232,7 @@ void Game::render()
 }
 
 /// <summary>
-/// 
+/// sets the current gamestate
 /// </summary>
 /// <param name="gameMode"></param>
 void Game::setGameState(GameState gameMode)
@@ -235,7 +241,7 @@ void Game::setGameState(GameState gameMode)
 }
 
 /// <summary>
-/// 
+/// returns the current gamestate
 /// </summary>
 /// <returns></returns>
 GameState Game::getGameState()
@@ -243,6 +249,9 @@ GameState Game::getGameState()
 	return gameState;
 }
 
+/// <summary>
+/// loads all of the games textures and sets them to their relevant sprite
+/// </summary>
 void Game::loadSprites()
 {
 	m_bottomLeftTileTexture.loadFromFile("ASSETS/Textures/bottom_left_corner.png");
@@ -279,6 +288,12 @@ void Game::loadSprites()
 	m_projectileSprite.setTexture(m_projectileTexture);
 }
 
+/// <summary>
+/// creates the vector of tiles and sets their position and sprite
+/// </summary>
+/// <param name="type"></param>
+/// <param name="x"></param>
+/// <param name="y"></param>
 void Game::determineTile(int type, int x, int y)
 {
 	if (type == 0) {
@@ -321,38 +336,3 @@ void Game::determineTile(int type, int x, int y)
 		m_tileMap.push_back(Tile(sf::Vector2f(x, y), m_tJunctionDownSprite, 12));
 	}
 }
-
-//void Game::Game::loadAdjacents()
-//{
-//	for (int i = 0; i < 32; i++)
-//	{
-//		for (int j = 0; j < 32; j++)
-//		{
-//			if (newMap[sf::Vector2f(j, i)].m_type > 1)
-//			{
-//				if (j - 1 > 0)
-//				{
-//					if (m_tileMap[j - 1, i].m_type != 1)
-//					{
-//						m_tileMap[j, i].adjacents.push_back(&m_tileMap[j - 1, i]);
-//					}
-//
-//					if (m_tileMap[j + 1, i].m_type > 1)
-//					{
-//						m_tileMap[j, i].adjacents.push_back(&m_tileMap[j + 1, i]);
-//					}
-//
-//					if (m_tileMap[j, i - 1].m_type != 1)
-//					{
-//						m_tileMap[j, i].adjacents.push_back(&m_tileMap[j, i - 1]);
-//					}
-//
-//					if (m_tileMap[j, i + 1].m_type > 1)
-//					{
-//						m_tileMap[j, i].adjacents.push_back(&m_tileMap[j, i + 1]);
-//					}
-//				}
-//			}
-//		}
-//	}
-//}

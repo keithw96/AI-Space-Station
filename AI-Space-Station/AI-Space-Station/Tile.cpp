@@ -1,5 +1,11 @@
 #include "Tile.h"
 
+/// <summary>
+/// constructor
+/// </summary>
+/// <param name="position"></param>
+/// <param name="sprite"></param>
+/// <param name="t"></param>
 Tile::Tile(sf::Vector2f position, sf::Sprite sprite, int t)
 {
 	m_sprite = sprite;
@@ -10,17 +16,17 @@ Tile::Tile(sf::Vector2f position, sf::Sprite sprite, int t)
 	m_sprite.setPosition(m_position.x * m_sprite.getTextureRect().width * m_sprite.getScale().x, m_position.y * m_sprite.getTextureRect().height * m_sprite.getScale().y);
 }
 
+/// <summary>
+/// rensers the tile
+/// </summary>
+/// <param name="window"></param>
 void Tile::draw(sf::RenderWindow *window) 
 {
-	if (m_type != 1)
-	{
-		int derp = 0;
-	}
 	window->draw(m_sprite);
 }
 
 /// <summary>
-/// 
+/// returns the sprite of the tile
 /// </summary>
 /// <returns></returns>
 sf::Sprite Tile::getSprite()
@@ -29,7 +35,7 @@ sf::Sprite Tile::getSprite()
 }
 
 /// <summary>
-/// 
+/// returns the type of the tile
 /// </summary>
 /// <returns></returns>
 int Tile::getType()
