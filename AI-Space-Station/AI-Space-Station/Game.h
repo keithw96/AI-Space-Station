@@ -15,12 +15,15 @@
 #include <iostream>
 #include "SFML/Graphics.hpp"
 #include "Tile.h"
+#include "AlienNest.h"
+#include "Predator.h"
 
 //
 class Splash;
 class License;
 class Player;
 class PowerUp;
+class AlienNest;
 
 enum class GameState
 {
@@ -68,6 +71,9 @@ private:
 	sf::Texture m_tJunctionDownTexture;
 	sf::Texture m_black_tileTexture;
 	sf::Texture m_tileTexture;
+	sf::Texture m_nestTexture;
+	sf::Texture m_predatorTexture;
+	sf::Texture m_projectileTexture;
 
 	sf::Sprite m_horizontalTileSprite;
 	sf::Sprite m_verticalTileSprite;
@@ -81,9 +87,13 @@ private:
 	sf::Sprite m_tJunctionDownSprite;
 	sf::Sprite m_black_tileSprite;
 	sf::Sprite m_tileSprite;
+	sf::Sprite m_nestSprite;
+	sf::Sprite m_predatorSprite;
+	sf::Sprite m_projectileSprite;
 
 	std::vector<Tile> m_tileMap;
-
+	std::vector<AlienNest> m_nestArr;
+	std::vector<Predator> m_predatorArr;
 	/*
 	1 = black tile
 	2 = vertical tile
@@ -135,6 +145,7 @@ private:
 	};
 
 	//
+	Predator * m_predator;
 	Splash * m_splash;
 	License * m_license;
 	Player * m_player;

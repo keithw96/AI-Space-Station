@@ -39,6 +39,10 @@ Game::Game() :
 		}
 	}
 
+	m_nestArr.push_back(AlienNest(sf::Vector2f(4260, 812), m_nestSprite, m_projectileSprite));
+	m_nestArr.push_back(AlienNest(sf::Vector2f(1061, 1557), m_nestSprite, m_projectileSprite));
+
+	m_predator = new Predator(sf::Vector2f(4269, 3462), m_predatorSprite);
 	m_splash = new Splash();
 	m_license = new License();
 	m_player = new Player();
@@ -113,7 +117,10 @@ void Game::update(sf::Time deltaTime)
 
 		m_player->update(deltaTime, m_view, m_powerup);
 		m_powerup->update(deltaTime);
-
+		for (int i = 0; i < m_nestArr.size(); i++)
+		{
+			m_nestArr[i].update(deltaTime, m_player->getPosition());
+		}
 		break;
 	case GameState::CONTROLS:
 
@@ -177,7 +184,13 @@ void Game::render()
 			m_tileMap[i].draw(&m_window);
 		}
 
+		for (int i = 0; i < m_nestArr.size(); i++)
+		{
+			m_nestArr[i].render(&m_window, sf::Vector2f(1.0, 1.0));
+		}
+
 		m_player->render(m_window, sf::Vector2f(1.0f, 1.0f));
+		m_predator->render(&m_window, sf::Vector2f(1.0, 1.0));
 		//
 		m_powerup->render(m_window);
 
@@ -188,7 +201,13 @@ void Game::render()
 			m_tileMap[i].draw(&m_window);
 		}
 
+		for (int i = 0; i < m_nestArr.size(); i++)
+		{
+			m_nestArr[i].render(&m_window, sf::Vector2f(2.0, 2.0));
+		}
+
 		m_player->render(m_window, sf::Vector2f(10.0f, 10.0f));
+		m_predator->render(&m_window, sf::Vector2f(10.0, 10.0));
 		//
 		m_powerup->render(m_window);
 		break;
@@ -236,6 +255,9 @@ void Game::loadSprites()
 	m_tJunctionDownTexture.loadFromFile("ASSETS/Textures/T_junction_down.PNG");
 	m_black_tileTexture.loadFromFile("ASSETS/Textures/black_tile.png");
 	m_tileTexture.loadFromFile("ASSETS/Textures/tile.png");
+	m_nestTexture.loadFromFile("ASSETS/Textures/alien_maker.png");
+	m_predatorTexture.loadFromFile("ASSETS/Textures/predator.png");
+	m_projectileTexture.loadFromFile("ASSETS/Textures/laser.png");
 
 	m_black_tileSprite.setTexture(m_black_tileTexture);
 	m_bottomLeftTileSprite.setTexture(m_bottomLeftTileTexture);
@@ -249,6 +271,9 @@ void Game::loadSprites()
 	m_topLeftTileSprite.setTexture(m_topLeftTileTexture);
 	m_topRightTileSprite.setTexture(m_topRightTileTexture);
 	m_verticalTileSprite.setTexture(m_verticalTileTexture);
+	m_nestSprite.setTexture(m_nestTexture);
+	m_predatorSprite.setTexture(m_predatorTexture);
+	m_projectileSprite.setTexture(m_projectileTexture);
 }
 
 void Game::determineTile(int type, int x, int y)

@@ -13,4 +13,5 @@ public:
 
 
 	sf::Vector2f m_position;
+
 };

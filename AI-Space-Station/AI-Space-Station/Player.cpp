@@ -97,6 +97,8 @@ void Player::update(sf::Time deltaTime, sf::View & v, PowerUp * powerup)
 	powerupCollision(powerup);
 
 	v.setCenter(m_sprite.getPosition());
+
+	//std::cout << std::to_string(m_position.x) + ", " + std::to_string(m_position.y) << std::endl;
 }
 
 /// <summary>
