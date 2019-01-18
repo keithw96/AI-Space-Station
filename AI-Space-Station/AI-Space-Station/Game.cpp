@@ -46,6 +46,7 @@ Game::Game() :
 	m_splash = new Splash();
 	m_license = new License();
 	m_player = new Player();
+	m_miniPlayer = new Player();
 	m_powerup = new PowerUp();
 }
 
@@ -113,7 +114,11 @@ void Game::update(sf::Time deltaTime)
 	case GameState::GAME:
 		//
 
-		m_player->update(deltaTime, m_view, m_powerup);
+		m_player->update(deltaTime, m_view, m_powerup, m_tileMap, 1);
+		m_miniPlayer->update(deltaTime, m_view, m_powerup, m_tileMap, 2);
+
+		m_miniPlayer->setPosition(m_player->getPosition());
+
 		m_powerup->update(deltaTime);
 		for (int i = 0; i < m_nestArr.size(); i++)
 		{
@@ -192,7 +197,7 @@ void Game::render()
 
 		m_window.setView(miniMap);
 
-//minimap render
+		//minimap render
 		for (int i = 0; i < m_tileMap.size(); i++)
 		{
 			m_tileMap[i].draw(&m_window);
@@ -200,10 +205,10 @@ void Game::render()
 
 		for (int i = 0; i < m_nestArr.size(); i++)
 		{
-			m_nestArr[i].render(&m_window, sf::Vector2f(2.0, 2.0));
+			m_nestArr[i].render(&m_window, sf::Vector2f(1.0, 1.0));
 		}
 
-		m_player->render(m_window, sf::Vector2f(10.0f, 10.0f));
+		m_miniPlayer->render(m_window, sf::Vector2f(10.0f, 10.0f));
 		m_predator->render(&m_window, sf::Vector2f(10.0, 10.0));
 		//
 		m_powerup->render(m_window);
@@ -275,41 +280,44 @@ void Game::loadSprites()
 
 void Game::determineTile(int type, int x, int y)
 {
+	if (type == 0) {
+		m_tileMap.push_back(Tile(sf::Vector2f(x, y), m_black_tileSprite, 0));
+	}
 	if (type == 1) {
-		m_tileMap.push_back(Tile(sf::Vector2f(x, y), m_black_tileSprite, type));
+		m_tileMap.push_back(Tile(sf::Vector2f(x, y), m_black_tileSprite, 1));
 	}
 	if (type == 2) {
-		m_tileMap.push_back(Tile(sf::Vector2f(x, y), m_verticalTileSprite, type));
+		m_tileMap.push_back(Tile(sf::Vector2f(x, y), m_verticalTileSprite, 2));
 	}
 	if (type == 3) {
-		m_tileMap.push_back(Tile(sf::Vector2f(x, y), m_horizontalTileSprite, type));
+		m_tileMap.push_back(Tile(sf::Vector2f(x, y), m_horizontalTileSprite, 3));
 	}
 	if (type == 4) {
-		m_tileMap.push_back(Tile(sf::Vector2f(x, y), m_topLeftTileSprite, type));
+		m_tileMap.push_back(Tile(sf::Vector2f(x, y), m_topLeftTileSprite, 4));
 	}
 	if (type == 5) {
-		m_tileMap.push_back(Tile(sf::Vector2f(x, y), m_topRightTileSprite, type));
+		m_tileMap.push_back(Tile(sf::Vector2f(x, y), m_topRightTileSprite, 5));
 	}
 	if (type == 6) {
-		m_tileMap.push_back(Tile(sf::Vector2f(x, y), m_bottomLeftTileSprite, type));
+		m_tileMap.push_back(Tile(sf::Vector2f(x, y), m_bottomLeftTileSprite, 6));
 	}
 	if (type == 7) {
-		m_tileMap.push_back(Tile(sf::Vector2f(x, y), m_bottomRightTileSprite, type));
+		m_tileMap.push_back(Tile(sf::Vector2f(x, y), m_bottomRightTileSprite, 7));
 	}
 	if (type == 8) {
-		m_tileMap.push_back(Tile(sf::Vector2f(x, y), m_tileSprite, type));
+		m_tileMap.push_back(Tile(sf::Vector2f(x, y), m_tileSprite, 8));
 	}
 	if (type == 9) {
-		m_tileMap.push_back(Tile(sf::Vector2f(x, y), m_tJunctionLeftSprite, type));
+		m_tileMap.push_back(Tile(sf::Vector2f(x, y), m_tJunctionLeftSprite, 9));
 	}
 	if (type == 10) {
-		m_tileMap.push_back(Tile(sf::Vector2f(x, y), m_tJunctionRightSprite, type));
+		m_tileMap.push_back(Tile(sf::Vector2f(x, y), m_tJunctionRightSprite, 10));
 	}
 	if (type == 11) {
-		m_tileMap.push_back(Tile(sf::Vector2f(x, y), m_tJunctionUpSprite, type));
+		m_tileMap.push_back(Tile(sf::Vector2f(x, y), m_tJunctionUpSprite, 11));
 	}
 	if (type == 12) {
-		m_tileMap.push_back(Tile(sf::Vector2f(x, y), m_tJunctionDownSprite, type));
+		m_tileMap.push_back(Tile(sf::Vector2f(x, y), m_tJunctionDownSprite, 12));
 	}
 }
 

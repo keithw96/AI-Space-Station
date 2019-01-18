@@ -13,9 +13,13 @@
 #define PLAYER_H
 
 #include "SFML/Graphics.hpp"
+
 #include "Power-Up.h"
+#include "Tile.h"
 #include "Projectile.h"
+
 #include <iostream>
+#include <vector>
 
 //
 class Player
@@ -24,15 +28,19 @@ public:
 	Player();
 	~Player();
 
-	void update(sf::Time deltaTime, sf::View & v, PowerUp * powerup);
+	void update(sf::Time deltaTime, sf::View & v, PowerUp * powerup, std::vector<Tile> &tilemap, int playerNumber);
 	void render(sf::RenderWindow& window, sf::Vector2f scale);
 
 	sf::Vector2f getPosition();
+	void setPosition(sf::Vector2f position);
+
+	void tileCollision(std::vector<Tile> &tilemap, int playerNumber);
 
 private:
 	void addVelocity();
 	void powerupColourAnimate();
 	void powerupTime();
+	void createBoundaryTileVector(std::vector<Tile> &tilemap);
 
 	void workerCollision();
 	void projectileCollision();
@@ -54,11 +62,13 @@ private:
 
 	std::vector<Projectile*> m_projectiles;
 
-	float m_maxSpeed, m_boostSpeed, m_angle, m_maxVelocity, m_impulseX, m_impulseY, m_friction;
+	float m_maxSpeed, m_boostSpeed, m_angle, m_maxVelocity;
 
 	int m_health, m_animatedColour, m_iColour, m_bColour, m_powerupTime;
 
-	bool m_moving, m_invincible, m_boosted;
+	bool m_invincible, m_boosted, m_mapCreated, m_up, m_right, m_down, m_left;
+
+	std::vector<Tile> m_boundaryTiles;
 };
 
 #endif // !PLAYER_H
