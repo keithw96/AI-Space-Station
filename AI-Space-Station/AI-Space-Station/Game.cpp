@@ -39,6 +39,10 @@ Game::Game() :
 		}
 	}
 
+	m_nestArr.push_back(AlienNest(sf::Vector2f(4260, 812), m_nestSprite, m_projectileSprite));
+	m_nestArr.push_back(AlienNest(sf::Vector2f(1061, 1557), m_nestSprite, m_projectileSprite));
+
+	m_predator = new Predator(sf::Vector2f(4269, 3462), m_predatorSprite);
 	m_splash = new Splash();
 	m_license = new License();
 	m_player = new Player();
@@ -66,11 +70,9 @@ void Game::run()
 		timeSinceLastUpdate += clock.restart();
 		while (timeSinceLastUpdate > timePerFrame)
 		{
-			//timeSinceLastUpdate -= timePerFrame;
 			processEvents();
 			update(timeSinceLastUpdate);
 			timeSinceLastUpdate = sf::Time::Zero;
-
 		}
 
 		render();
@@ -113,7 +115,10 @@ void Game::update(sf::Time deltaTime)
 
 		m_player->update(deltaTime, m_view, m_powerup);
 		m_powerup->update(deltaTime);
-
+		for (int i = 0; i < m_nestArr.size(); i++)
+		{
+			m_nestArr[i].update(deltaTime, m_player->getPosition());
+		}
 		break;
 	case GameState::CONTROLS:
 
@@ -124,7 +129,6 @@ void Game::update(sf::Time deltaTime)
 	}
 
 	m_window.display();
-	//m_window.setView(m_view);
 }
 
 //
@@ -153,8 +157,6 @@ void Game::render()
 	//
 	m_window.clear(sf::Color(0, 0, 0));
 
-	
-
 	// Updates rendering based on current state
 	switch (gameState)
 	{
@@ -169,6 +171,7 @@ void Game::render()
 		break;
 	case GameState::GAME:
 		//
+
 //game render
 		m_window.setView(m_view);
 
@@ -177,18 +180,31 @@ void Game::render()
 			m_tileMap[i].draw(&m_window);
 		}
 
-		m_player->render(m_window);
+		for (int i = 0; i < m_nestArr.size(); i++)
+		{
+			m_nestArr[i].render(&m_window, sf::Vector2f(1.0, 1.0));
+		}
+
+		m_player->render(m_window, sf::Vector2f(1.0f, 1.0f));
+		m_predator->render(&m_window, sf::Vector2f(1.0, 1.0));
 		//
 		m_powerup->render(m_window);
 
 		m_window.setView(miniMap);
+
 //minimap render
 		for (int i = 0; i < m_tileMap.size(); i++)
 		{
 			m_tileMap[i].draw(&m_window);
 		}
 
-		m_player->render(m_window);
+		for (int i = 0; i < m_nestArr.size(); i++)
+		{
+			m_nestArr[i].render(&m_window, sf::Vector2f(2.0, 2.0));
+		}
+
+		m_player->render(m_window, sf::Vector2f(10.0f, 10.0f));
+		m_predator->render(&m_window, sf::Vector2f(10.0, 10.0));
 		//
 		m_powerup->render(m_window);
 		break;
@@ -236,6 +252,9 @@ void Game::loadSprites()
 	m_tJunctionDownTexture.loadFromFile("ASSETS/Textures/T_junction_down.PNG");
 	m_black_tileTexture.loadFromFile("ASSETS/Textures/black_tile.png");
 	m_tileTexture.loadFromFile("ASSETS/Textures/tile.png");
+	m_nestTexture.loadFromFile("ASSETS/Textures/alien_maker.png");
+	m_predatorTexture.loadFromFile("ASSETS/Textures/predator.png");
+	m_projectileTexture.loadFromFile("ASSETS/Textures/laserBall.png");
 
 	m_black_tileSprite.setTexture(m_black_tileTexture);
 	m_bottomLeftTileSprite.setTexture(m_bottomLeftTileTexture);
@@ -249,44 +268,82 @@ void Game::loadSprites()
 	m_topLeftTileSprite.setTexture(m_topLeftTileTexture);
 	m_topRightTileSprite.setTexture(m_topRightTileTexture);
 	m_verticalTileSprite.setTexture(m_verticalTileTexture);
+	m_nestSprite.setTexture(m_nestTexture);
+	m_predatorSprite.setTexture(m_predatorTexture);
+	m_projectileSprite.setTexture(m_projectileTexture);
 }
 
 void Game::determineTile(int type, int x, int y)
 {
 	if (type == 1) {
-		m_tileMap.push_back(Tile(sf::Vector2f(x, y), m_black_tileSprite));
+		m_tileMap.push_back(Tile(sf::Vector2f(x, y), m_black_tileSprite, type));
 	}
 	if (type == 2) {
-		m_tileMap.push_back(Tile(sf::Vector2f(x, y), m_verticalTileSprite));
+		m_tileMap.push_back(Tile(sf::Vector2f(x, y), m_verticalTileSprite, type));
 	}
 	if (type == 3) {
-		m_tileMap.push_back(Tile(sf::Vector2f(x, y), m_horizontalTileSprite));
+		m_tileMap.push_back(Tile(sf::Vector2f(x, y), m_horizontalTileSprite, type));
 	}
 	if (type == 4) {
-		m_tileMap.push_back(Tile(sf::Vector2f(x, y), m_topLeftTileSprite));
+		m_tileMap.push_back(Tile(sf::Vector2f(x, y), m_topLeftTileSprite, type));
 	}
 	if (type == 5) {
-		m_tileMap.push_back(Tile(sf::Vector2f(x, y), m_topRightTileSprite));
+		m_tileMap.push_back(Tile(sf::Vector2f(x, y), m_topRightTileSprite, type));
 	}
 	if (type == 6) {
-		m_tileMap.push_back(Tile(sf::Vector2f(x, y), m_bottomLeftTileSprite));
+		m_tileMap.push_back(Tile(sf::Vector2f(x, y), m_bottomLeftTileSprite, type));
 	}
 	if (type == 7) {
-		m_tileMap.push_back(Tile(sf::Vector2f(x, y), m_bottomRightTileSprite));
+		m_tileMap.push_back(Tile(sf::Vector2f(x, y), m_bottomRightTileSprite, type));
 	}
 	if (type == 8) {
-		m_tileMap.push_back(Tile(sf::Vector2f(x, y), m_tileSprite));
+		m_tileMap.push_back(Tile(sf::Vector2f(x, y), m_tileSprite, type));
 	}
 	if (type == 9) {
-		m_tileMap.push_back(Tile(sf::Vector2f(x, y), m_tJunctionLeftSprite));
+		m_tileMap.push_back(Tile(sf::Vector2f(x, y), m_tJunctionLeftSprite, type));
 	}
 	if (type == 10) {
-		m_tileMap.push_back(Tile(sf::Vector2f(x, y), m_tJunctionRightSprite));
+		m_tileMap.push_back(Tile(sf::Vector2f(x, y), m_tJunctionRightSprite, type));
 	}
 	if (type == 11) {
-		m_tileMap.push_back(Tile(sf::Vector2f(x, y), m_tJunctionUpSprite));
+		m_tileMap.push_back(Tile(sf::Vector2f(x, y), m_tJunctionUpSprite, type));
 	}
 	if (type == 12) {
-		m_tileMap.push_back(Tile(sf::Vector2f(x, y), m_tJunctionDownSprite));
+		m_tileMap.push_back(Tile(sf::Vector2f(x, y), m_tJunctionDownSprite, type));
 	}
 }
+
+//void Game::Game::loadAdjacents()
+//{
+//	for (int i = 0; i < 32; i++)
+//	{
+//		for (int j = 0; j < 32; j++)
+//		{
+//			if (newMap[sf::Vector2f(j, i)].m_type > 1)
+//			{
+//				if (j - 1 > 0)
+//				{
+//					if (m_tileMap[j - 1, i].m_type != 1)
+//					{
+//						m_tileMap[j, i].adjacents.push_back(&m_tileMap[j - 1, i]);
+//					}
+//
+//					if (m_tileMap[j + 1, i].m_type > 1)
+//					{
+//						m_tileMap[j, i].adjacents.push_back(&m_tileMap[j + 1, i]);
+//					}
+//
+//					if (m_tileMap[j, i - 1].m_type != 1)
+//					{
+//						m_tileMap[j, i].adjacents.push_back(&m_tileMap[j, i - 1]);
+//					}
+//
+//					if (m_tileMap[j, i + 1].m_type > 1)
+//					{
+//						m_tileMap[j, i].adjacents.push_back(&m_tileMap[j, i + 1]);
+//					}
+//				}
+//			}
+//		}
+//	}
+//}

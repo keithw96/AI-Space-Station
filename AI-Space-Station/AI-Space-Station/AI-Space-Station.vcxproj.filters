@@ -36,6 +36,15 @@
     <ClCompile Include="Tile.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="AlienNest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Predator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Projectile.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -54,6 +63,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Tile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AlienNest.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Predator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Projectile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

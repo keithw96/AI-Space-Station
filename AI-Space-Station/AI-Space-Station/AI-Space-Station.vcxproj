@@ -125,19 +125,25 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AlienNest.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="LicenseScreen.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Power-Up.cpp" />
+    <ClCompile Include="Predator.cpp" />
+    <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="SplashScreen.cpp" />
     <ClCompile Include="Tile.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AlienNest.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="LicenseScreen.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Power-Up.h" />
+    <ClInclude Include="Predator.h" />
+    <ClInclude Include="Projectile.h" />
     <ClInclude Include="SplashScreen.h" />
     <ClInclude Include="Tile.h" />
   </ItemGroup>
