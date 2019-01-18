@@ -1,17 +1,25 @@
 #include "AlienNest.h"
 
-AlienNest::AlienNest(sf::Vector2f pos, sf::Sprite sprite, sf::Sprite projectileSprite)
+AlienNest::AlienNest(sf::Vector2f pos, sf::Sprite sprite, sf::Sprite projectileSprite, sf::Sprite predatorSprite)
 {
 	m_position = pos;
 	m_projectileSprite = projectileSprite;
 	m_sprite = sprite;
+	m_predatorSprite = predatorSprite;
+
 	m_sprite.setPosition(m_position);
 	m_sprite.setOrigin(sf::Vector2f(m_sprite.getTextureRect().width / 2, m_sprite.getTextureRect().height / 2));
+
+	Predator * pred1 = new Predator(sf::Vector2f(m_position.x + m_sprite.getTextureRect().width, m_position.y), predatorSprite, m_position);
+	Predator * pred2 = new Predator(sf::Vector2f(m_position.x - m_sprite.getTextureRect().width, m_position.y), predatorSprite, m_position);
+
+	m_predators.push_back(pred1);
+	m_predators.push_back(pred2);
 }
 
 void AlienNest::update(sf::Time deltaTime, sf::Vector2f playerPos)
 {
-	if (m_position.x - playerPos.x < 600 && m_position.x - playerPos.x > -600 && m_position.y - playerPos.y < 500 && m_position.y - playerPos.y > -500 && m_projectiles.size() < 1)
+	if (m_position.x - playerPos.x < 300 && m_position.x - playerPos.x > -300 && m_position.y - playerPos.y < 300 && m_position.y - playerPos.y > -300 && m_projectiles.size() < 1)
 	{
 		Projectile * bullet = new Projectile(m_position, m_projectileSprite, true);
 		m_projectiles.push_back(bullet);
@@ -29,6 +37,11 @@ void AlienNest::update(sf::Time deltaTime, sf::Vector2f playerPos)
 			i--;
 		}
 	}
+
+	for (auto& pred : m_predators)
+	{
+		pred->update(deltaTime, playerPos);
+	}
 }
 
 void AlienNest::render(sf::RenderWindow *window, sf::Vector2f scale)
@@ -38,5 +51,10 @@ void AlienNest::render(sf::RenderWindow *window, sf::Vector2f scale)
 	for (auto& p : m_projectiles)
 	{
 		p->Render(window, scale);
+	}
+
+	for (auto& pred : m_predators)
+	{
+		pred->render(window, scale);
 	}
 }

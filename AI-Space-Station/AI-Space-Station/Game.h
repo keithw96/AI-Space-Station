@@ -101,7 +101,6 @@ private:
 
 	std::vector<Tile> m_tileMap;
 	std::vector<AlienNest> m_nestArr;
-	std::vector<Predator> m_predatorArr;
 	/*
 	1 = black tile
 	2 = vertical tile
