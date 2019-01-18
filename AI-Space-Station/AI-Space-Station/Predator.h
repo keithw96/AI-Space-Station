@@ -7,7 +7,7 @@ public:
 
 	void update(sf::Time deltaTime, sf::Vector2f playerPos);
 	void render(sf::RenderWindow *window, sf::Vector2f scale);
-	sf::te
+
 private:
 	sf::Vector2f m_startPos;
 	sf::Vector2f m_position;
