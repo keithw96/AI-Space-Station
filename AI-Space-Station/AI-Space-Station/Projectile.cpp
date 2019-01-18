@@ -21,7 +21,7 @@ Projectile::~Projectile()
 
 void Projectile::Update(sf::Time deltaTime, sf::Vector2f playerPos)
 {
-	std::cout << std::to_string(count) << std::endl;
+	//std::cout << std::to_string(count) << std::endl;
 	if (m_homing && m_alive)
 	{
 		count++;

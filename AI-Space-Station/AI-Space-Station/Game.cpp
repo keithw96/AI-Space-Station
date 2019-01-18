@@ -70,11 +70,9 @@ void Game::run()
 		timeSinceLastUpdate += clock.restart();
 		while (timeSinceLastUpdate > timePerFrame)
 		{
-			//timeSinceLastUpdate -= timePerFrame;
 			processEvents();
 			update(timeSinceLastUpdate);
 			timeSinceLastUpdate = sf::Time::Zero;
-
 		}
 
 		render();
@@ -131,7 +129,6 @@ void Game::update(sf::Time deltaTime)
 	}
 
 	m_window.display();
-	//m_window.setView(m_view);
 }
 
 //
@@ -160,8 +157,6 @@ void Game::render()
 	//
 	m_window.clear(sf::Color(0, 0, 0));
 
-	
-
 	// Updates rendering based on current state
 	switch (gameState)
 	{
@@ -176,6 +171,7 @@ void Game::render()
 		break;
 	case GameState::GAME:
 		//
+
 //game render
 		m_window.setView(m_view);
 
@@ -195,6 +191,7 @@ void Game::render()
 		m_powerup->render(m_window);
 
 		m_window.setView(miniMap);
+
 //minimap render
 		for (int i = 0; i < m_tileMap.size(); i++)
 		{
@@ -257,7 +254,7 @@ void Game::loadSprites()
 	m_tileTexture.loadFromFile("ASSETS/Textures/tile.png");
 	m_nestTexture.loadFromFile("ASSETS/Textures/alien_maker.png");
 	m_predatorTexture.loadFromFile("ASSETS/Textures/predator.png");
-	m_projectileTexture.loadFromFile("ASSETS/Textures/laser.png");
+	m_projectileTexture.loadFromFile("ASSETS/Textures/laserBall.png");
 
 	m_black_tileSprite.setTexture(m_black_tileTexture);
 	m_bottomLeftTileSprite.setTexture(m_bottomLeftTileTexture);

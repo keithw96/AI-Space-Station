@@ -17,5 +17,5 @@ private:
 	sf::Texture m_texture;
 	sf::Sprite m_sprite;
 	sf::Sprite m_projectileSprite;
-	std::vector<Projectile> m_projectiles;
+	std::vector<Projectile*> m_projectiles;
 };

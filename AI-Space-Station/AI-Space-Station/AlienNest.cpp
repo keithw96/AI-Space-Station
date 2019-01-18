@@ -13,18 +13,24 @@ void AlienNest::update(sf::Time deltaTime, sf::Vector2f playerPos)
 {
 	if (m_position.x - playerPos.x < 600 && m_position.x - playerPos.x > -600 && m_position.y - playerPos.y < 500 && m_position.y - playerPos.y > -500 && m_projectiles.size() < 1)
 	{
-		m_projectiles.push_back(Projectile(m_position, m_projectileSprite, true));
+		Projectile * bullet = new Projectile(m_position, m_projectileSprite, true);
+		m_projectiles.push_back(bullet);
 	}
 
 	for (int i = 0; i < m_projectiles.size(); i++)
 	{
-		m_projectiles[i].Update(deltaTime, playerPos);
+		m_projectiles[i]->Update(deltaTime, playerPos);
 
-		if (m_projectiles[i].m_alive == false)
+		if (m_projectiles[i]->m_alive == false)
 		{
-			m_projectiles[i].~Projectile();
+			m_projectiles[i]->~Projectile();
+			m_projectiles[i] = nullptr;
+			m_projectiles.erase(m_projectiles.begin() + i);
+			i--;
 		}
 	}
+
+	std::cout << std::to_string(m_projectiles.size()) << std::endl;
 
 }
 
@@ -34,6 +40,6 @@ void AlienNest::render(sf::RenderWindow *window, sf::Vector2f scale)
 	window->draw(m_sprite);
 	for (auto& p : m_projectiles)
 	{
-		p.Render(window, scale);
+		p->Render(window, scale);
 	}
 }

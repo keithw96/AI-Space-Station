@@ -1,4 +1,42 @@
-﻿  Projectile.cpp
+﻿  AlienNest.cpp
+c:\users\gameuser\documents\college stuff\ai for games\project\ai-space-station\ai-space-station\ai-space-station\aliennest.cpp(9): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\gameuser\documents\college stuff\ai for games\project\ai-space-station\ai-space-station\ai-space-station\aliennest.cpp(20): warning C4018: '<': signed/unsigned mismatch
+  Game.cpp
+c:\users\gameuser\documents\college stuff\ai for games\project\ai-space-station\ai-space-station\ai-space-station\game.cpp(22): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
+c:\users\gameuser\documents\college stuff\ai for games\project\ai-space-station\ai-space-station\ai-space-station\game.cpp(28): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
+c:\users\gameuser\documents\college stuff\ai for games\project\ai-space-station\ai-space-station\ai-space-station\game.cpp(118): warning C4018: '<': signed/unsigned mismatch
+c:\users\gameuser\documents\college stuff\ai for games\project\ai-space-station\ai-space-station\ai-space-station\game.cpp(178): warning C4018: '<': signed/unsigned mismatch
+c:\users\gameuser\documents\college stuff\ai for games\project\ai-space-station\ai-space-station\ai-space-station\game.cpp(183): warning C4018: '<': signed/unsigned mismatch
+c:\users\gameuser\documents\college stuff\ai for games\project\ai-space-station\ai-space-station\ai-space-station\game.cpp(196): warning C4018: '<': signed/unsigned mismatch
+c:\users\gameuser\documents\college stuff\ai for games\project\ai-space-station\ai-space-station\ai-space-station\game.cpp(201): warning C4018: '<': signed/unsigned mismatch
+c:\users\gameuser\documents\college stuff\ai for games\project\ai-space-station\ai-space-station\ai-space-station\game.cpp(279): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\gameuser\documents\college stuff\ai for games\project\ai-space-station\ai-space-station\ai-space-station\game.cpp(282): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\gameuser\documents\college stuff\ai for games\project\ai-space-station\ai-space-station\ai-space-station\game.cpp(285): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\gameuser\documents\college stuff\ai for games\project\ai-space-station\ai-space-station\ai-space-station\game.cpp(288): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\gameuser\documents\college stuff\ai for games\project\ai-space-station\ai-space-station\ai-space-station\game.cpp(291): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\gameuser\documents\college stuff\ai for games\project\ai-space-station\ai-space-station\ai-space-station\game.cpp(294): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\gameuser\documents\college stuff\ai for games\project\ai-space-station\ai-space-station\ai-space-station\game.cpp(297): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\gameuser\documents\college stuff\ai for games\project\ai-space-station\ai-space-station\ai-space-station\game.cpp(300): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\gameuser\documents\college stuff\ai for games\project\ai-space-station\ai-space-station\ai-space-station\game.cpp(303): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\gameuser\documents\college stuff\ai for games\project\ai-space-station\ai-space-station\ai-space-station\game.cpp(306): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\gameuser\documents\college stuff\ai for games\project\ai-space-station\ai-space-station\ai-space-station\game.cpp(309): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\gameuser\documents\college stuff\ai for games\project\ai-space-station\ai-space-station\ai-space-station\game.cpp(312): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  LicenseScreen.cpp
+  main.cpp
+  Player.cpp
+c:\users\gameuser\documents\college stuff\ai for games\project\ai-space-station\ai-space-station\ai-space-station\player.cpp(47): warning C4305: '=': truncation from 'double' to 'float'
+c:\users\gameuser\documents\college stuff\ai for games\project\ai-space-station\ai-space-station\ai-space-station\player.cpp(59): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\gameuser\documents\college stuff\ai for games\project\ai-space-station\ai-space-station\ai-space-station\player.cpp(133): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+c:\users\gameuser\documents\college stuff\ai for games\project\ai-space-station\ai-space-station\ai-space-station\player.cpp(134): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+  Power-Up.cpp
+c:\users\gameuser\documents\college stuff\ai for games\project\ai-space-station\ai-space-station\ai-space-station\power-up.cpp(92): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\users\gameuser\documents\college stuff\ai for games\project\ai-space-station\ai-space-station\ai-space-station\power-up.cpp(93): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+  Predator.cpp
+c:\users\gameuser\documents\college stuff\ai for games\project\ai-space-station\ai-space-station\ai-space-station\predator.cpp(8): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  Projectile.cpp
 c:\users\gameuser\documents\college stuff\ai for games\project\ai-space-station\ai-space-station\ai-space-station\projectile.cpp(14): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 c:\users\gameuser\documents\college stuff\ai for games\project\ai-space-station\ai-space-station\ai-space-station\projectile.cpp(67): warning C4305: 'initializing': truncation from 'double' to 'float'
+  SplashScreen.cpp
+  Tile.cpp
+  Generating Code...
   AI-Space-Station.vcxproj -> C:\Users\gameuser\Documents\college stuff\AI for games\Project\AI-Space-Station\AI-Space-Station\Debug\AI-Space-Station.exe
