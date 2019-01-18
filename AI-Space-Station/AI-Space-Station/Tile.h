@@ -4,13 +4,17 @@
 class Tile
 {
 public:
-	Tile(sf::Vector2f position, sf::Sprite sprite);
+	Tile(sf::Vector2f position, sf::Sprite sprite, int type);
 	
 	void draw(sf::RenderWindow *window);
 
-	sf::Sprite m_sprite;
-	sf::RectangleShape rec; 
+	sf::Sprite getSprite();
+	int getType();
 
+private:
+	sf::Sprite m_sprite;
 
 	sf::Vector2f m_position;
+
+	int m_type;
 };
